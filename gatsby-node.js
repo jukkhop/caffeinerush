@@ -4,4 +4,43 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
+const path = require(`path`);
+const slash = require(`slash`);
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+
+  try {
+    const { data, errors } = await graphql(`
+      {
+        allContentfulBlogPost {
+          edges {
+            node {
+              id
+              slug
+            }
+          }
+        }
+      }
+    `);
+
+    if (errors) {
+      console.log('Error retrieving contentful data', errors);
+    }
+
+    const template = path.resolve('./src/templates/post.js');
+
+    data.allContentfulBlogPost.edges.forEach(({ node }) => {
+      createPage({
+        path: `/posts/${node.slug}/`,
+        component: slash(template),
+        context: {
+          slug: node.slug,
+          id: node.id,
+        },
+      });
+    });
+  } catch (error) {
+    console.log('Error retrieving contentful data', error);
+  }
+};
