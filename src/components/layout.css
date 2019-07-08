@@ -1,6 +1,9 @@
 body {
   margin: 0;
 }
+footer {
+  text-align: center;
+}
 article,
 aside,
 details,

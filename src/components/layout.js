@@ -6,12 +6,9 @@ import styled from 'styled-components';
 import Header from './header';
 import './layout.css';
 
-const Body = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding-bottom: 1.45rem;
-  padding-left: 1.0875rem;
-  padding-right: 1.0875rem;
+const Body = styled.main`
+  height: 100vh;
+  margin: auto;
 `;
 
 const Layout = ({ children }) => (
@@ -30,7 +27,7 @@ const Layout = ({ children }) => (
         <Header siteTitle={data.site.siteMetadata.title} />
         <Body>
           {children}
-          <footer>© {new Date().getFullYear()}</footer>
+          <footer>© Jukka Hopeavuori {new Date().getFullYear()}</footer>
         </Body>
       </>
     )}

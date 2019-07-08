@@ -1,20 +1,25 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { cold, setConfig } from 'react-hot-loader';
 
+import Intro from '../components/intro';
 import Layout from '../components/layout';
-import Image from '../components/image';
 import SEO from '../components/seo';
+
+setConfig({ pureSFC: true });
+cold(Intro);
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>yaada yada</h1>
-    <p>bla bla</p>
-    <p>gobbledygook</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/posts/">Go to posts</Link>
+    <Intro />
+
+    {/* <h1>yaada yada</h1>
+      <p>bla bla</p>
+      <p>gobbledygook</p>
+      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+        <Image />
+      </div>
+      <Link to="/posts/">Go to posts</Link> */}
   </Layout>
 );
 

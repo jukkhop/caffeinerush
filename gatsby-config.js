@@ -50,5 +50,16 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    // {
+    //   resolve: `gatsby-plugin-prefetch-google-fonts`,
+    //   options: {
+    //     fonts: [
+    //       {
+    //         family: `Exo`,
+    //         variants: [`400`, `500`, `700`],
+    //       },
+    //     ],
+    //   },
+    // },
   ],
 };
