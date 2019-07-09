@@ -104,21 +104,23 @@ const Container = styled.div`
 
 const Credit = styled.div`
   bottom: ${x => x.bottom || 'auto'};
-  max-width: 460px;
-  min-height: 100px;
-  min-width: 460px;
+  min-height: 94px;
   position: relative;
   top: ${x => x.top || 'auto'};
+  width: 460px;
 
   @media (max-width: 575px) {
-    max-width: none;
-    min-width: unset;
+    width: 274px;
+  }
+
+  @media (max-width: 275px) {
+    width: auto;
   }
 
   @media (max-height: 641px) {
     bottom: 0;
     top: 0;
-    min-height: unset;
+    min-height: 64px;
   }
 `;
 
@@ -168,7 +170,7 @@ const credits = [
   },
   {
     key: 'born',
-    lines: ['Date of birth', 'May 1989'],
+    lines: ['Date of birth', 'MAY 1989'],
     top: '5rem',
   },
   {
@@ -178,18 +180,16 @@ const credits = [
   },
   {
     key: 'location',
-    lines: ['Location', 'HELSINKI'],
+    lines: ['Location', 'HELSINKI, FINLAND'],
     top: '5rem',
   },
 ];
 
 const Intro = () => {
-  const [state, setState] = useState({
+  const [{ credit, loopCount }, setState] = useState({
     credit: null,
     loopCount: 0,
   });
-
-  const { credit, loopCount } = state;
 
   useEffect(
     () => {

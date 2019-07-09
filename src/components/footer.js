@@ -26,6 +26,17 @@ const Link = styled.div`
     text-shadow: none;
     text-transform: none;
   }
+
+  a:hover {
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0) 1px,
+      white 1px,
+      white 2px,
+      rgba(0, 0, 0, 0) 2px
+    );
+  }
 `;
 
 const Stripes = styled.div`
