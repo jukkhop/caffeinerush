@@ -20,6 +20,10 @@ const Body = styled.main`
 
 const Children = styled.div`
   height: calc(100vh - 235px);
+
+  @media (max-width: ${mobile}) {
+    height: calc(100vh - 291px);
+  }
 `;
 
 const Layout = ({ children }) => (
