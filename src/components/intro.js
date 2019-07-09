@@ -10,7 +10,10 @@ import {
   ModernVisionWOFF,
 } from '../utils/fonts';
 
+const desktop = '960px';
 const mobile = '576px';
+const small = '275px';
+
 const typingDuration = 350;
 const fadeOutDelay = 5000;
 
@@ -96,31 +99,57 @@ const Keyframes = createGlobalStyle`
 
 const Container = styled.div`
   align-items: center;
+  align-self: flex-start;
   background-color: #281e3b;
   display: flex;
+  flex-basis: 50%;
   height: 100%;
   justify-content: center;
-`;
+  width: 400px;
+  margin: 0 auto;
 
-const Credit = styled.div`
-  bottom: ${x => x.bottom || 'auto'};
-  min-height: 94px;
-  position: relative;
-  top: ${x => x.top || 'auto'};
-  width: 460px;
+  @media (max-width: ${desktop}) {
+    padding-top: 2rem;
+  }
 
-  @media (max-width: 575px) {
+  @media (max-width: ${mobile}) {
     width: 274px;
   }
 
-  @media (max-width: 275px) {
+  @media (max-width: ${small}) {
+    width: auto;
+  }
+
+  @media (max-height: 641px) {
+    align-self: center;
+    padding-top: 1rem;
+  }
+`;
+
+const Credit = styled.div`
+  min-height: 94px;
+  position: relative;
+  top: ${x => x.top || 'auto'};
+  width: 400px;
+
+  @media (max-width: ${desktop}) {
+    bottom: 0;
+    min-height: 64px;
+    top: 0;
+  }
+
+  @media (max-width: ${mobile}) {
+    width: 274px;
+  }
+
+  @media (max-width: ${small}) {
     width: auto;
   }
 
   @media (max-height: 641px) {
     bottom: 0;
-    top: 0;
     min-height: 64px;
+    top: 0;
   }
 `;
 
@@ -130,6 +159,19 @@ const CreditLine = styled.div`
 
 const WriterContainer = styled.div`
   display: flex;
+`;
+
+const Rectangle = styled.div`
+  align-self: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  height: 23px;
+  width: 21px;
+
+  @media (max-width: ${mobile}) {
+    height: 18px;
+    width: 16px;
+    margin-bottom: 2px;
+  }
 `;
 
 const Writer = styled.div`
@@ -149,39 +191,26 @@ const Writer = styled.div`
   }
 `;
 
-const Rectangle = styled.div`
-  align-self: center;
-  background-color: rgba(255, 255, 255, 0.95);
-  height: 23px;
-  width: 21px;
-
-  @media (max-width: ${mobile}) {
-    height: 18px;
-    width: 16px;
-    margin-bottom: 2px;
-  }
-`;
-
 const credits = [
   {
     key: 'name',
     lines: ['Name', 'JUKKA HOPEAVUORI'],
-    bottom: '5rem',
+    top: '1rem',
   },
   {
     key: 'born',
     lines: ['Date of birth', 'MAY 1989'],
-    top: '5rem',
+    top: '6rem',
   },
   {
     key: 'occupation',
     lines: ['Occupation', 'DEVELOPER'],
-    bottom: '5rem',
+    top: '1rem',
   },
   {
     key: 'location',
     lines: ['Location', 'HELSINKI, FINLAND'],
-    top: '5rem',
+    top: '6rem',
   },
 ];
 
