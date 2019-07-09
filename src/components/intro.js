@@ -84,11 +84,11 @@ const Keyframes = createGlobalStyle`
     animation: hide ${typingDuration}ms steps(1) 0s 1 forwards;
   }
 
-  .credit-exit .rectangle-flicker-out {
+  .credit-exit-active .rectangle-flicker-out {
     animation: flicker-out 100ms steps(1) 0s 5 forwards;
   }
 
-  .credit-exit .writer {
+  .credit-exit-active .writer {
     animation: fade-out 650ms linear 500ms 1 forwards;
   }
 
@@ -256,7 +256,7 @@ const Intro = () => {
       <Keyframes />
       <Container>
         <TransitionGroup>
-          <CSSTransition key={key} timeout={1150 * 2} classNames="credit">
+          <CSSTransition key={key} timeout={1150} classNames="credit">
             <Delay timeout={1200}>
               <Credit top={top} bottom={bottom}>
                 {lines.map((line, index) => (
