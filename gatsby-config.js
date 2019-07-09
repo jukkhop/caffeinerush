@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `caffeinerush`,
-    description: `Just your regular blog page, nothing special here.`,
+    description: `Jukka Hopeavuori's introduction page and blog`,
     author: `@jukkhop`,
   },
   plugins: [

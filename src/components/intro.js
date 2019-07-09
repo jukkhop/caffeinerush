@@ -98,7 +98,6 @@ const Keyframes = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  align-items: center;
   align-self: flex-start;
   background-color: #281e3b;
   display: flex;
@@ -109,7 +108,7 @@ const Container = styled.div`
   margin: 0 auto;
 
   @media (max-width: ${large}) {
-    padding-top: 2rem;
+    padding-top: 2.25rem;
   }
 
   @media (max-width: ${medium}) {
@@ -122,7 +121,11 @@ const Container = styled.div`
 
   @media (max-height: 641px) {
     align-self: center;
-    padding-top: 1rem;
+    padding-top: 1.5rem;
+  }
+
+  @media (max-height: 575px) {
+    padding-top: 0.5rem;
   }
 `;
 

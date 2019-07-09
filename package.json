@@ -1,7 +1,7 @@
 {
   "name": "caffeinerush",
   "private": true,
-  "description": "Personal home page",
+  "description": "Personal introduction website",
   "version": "1.0.0",
   "author": "Jukka Hopeavuori <jukka.hopea@gmail.com>",
   "dependencies": {
