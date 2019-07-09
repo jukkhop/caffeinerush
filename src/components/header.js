@@ -81,7 +81,6 @@ const Nav = styled.li`
     cursor: pointer;
     font-family: Varela Round;
     font-size: 10px;
-    font-weight: 700;
     letter-spacing: 2.25px;
     text-decoration: none;
     text-shadow: none;
