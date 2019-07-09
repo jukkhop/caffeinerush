@@ -256,7 +256,7 @@ const Intro = () => {
       <Keyframes />
       <Container>
         <TransitionGroup>
-          <CSSTransition key={key} timeout={1150} classNames="credit">
+          <CSSTransition key={key} timeout={2000} classNames="credit">
             <Delay timeout={1200}>
               <Credit top={top} bottom={bottom}>
                 {lines.map((line, index) => (
