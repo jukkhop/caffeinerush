@@ -4,11 +4,22 @@ import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 
 import Header from './header';
+import Footer from './footer';
 import './layout.css';
 
+const mobile = '576px';
+
 const Body = styled.main`
-  height: 100vh;
   margin: auto;
+  padding: 2rem 2rem 0rem;
+
+  @media (max-width: ${mobile}) {
+    padding: 2rem 0.5rem 0rem;
+  }
+`;
+
+const Children = styled.div`
+  height: calc(100vh - 235px);
 `;
 
 const Layout = ({ children }) => (
@@ -26,8 +37,8 @@ const Layout = ({ children }) => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
         <Body>
-          {children}
-          <footer>© Jukka Hopeavuori {new Date().getFullYear()}</footer>
+          <Children>{children}</Children>
+          <Footer />
         </Body>
       </>
     )}

@@ -64,13 +64,13 @@ const Keyframes = createGlobalStyle`
 
   @keyframes fade-out {
     0% {
-      color: #803fbf;
+      color: #d40078;
       filter: blur(2px);
       opacity: 1;
       transform: scale(1.05);
     }
     100% {
-      color: #803fbf;
+      color: #d40078;
       filter: blur(2px);
       opacity: 0;
       transform: scale(1.05);
@@ -94,23 +94,32 @@ const Keyframes = createGlobalStyle`
   }
 `;
 
-// background-color: rgba(0, 0, 0, 0.9);
-
 const Container = styled.div`
+  align-items: center;
   background-color: #281e3b;
-  min-height: 420px;
-  padding: 2rem;
-
-  @media (max-width: ${mobile}) {
-    padding: 2rem 0.5rem;
-  }
+  display: flex;
+  height: 100%;
+  justify-content: center;
 `;
 
 const Credit = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 4rem;
-  max-width: 450px;
+  bottom: ${x => x.bottom || 'auto'};
+  max-width: 460px;
+  min-height: 100px;
+  min-width: 460px;
+  position: relative;
+  top: ${x => x.top || 'auto'};
+
+  @media (max-width: 575px) {
+    max-width: none;
+    min-width: unset;
+  }
+
+  @media (max-height: 641px) {
+    bottom: 0;
+    top: 0;
+    min-height: unset;
+  }
 `;
 
 const CreditLine = styled.div`
@@ -134,28 +143,43 @@ const Writer = styled.div`
   white-space: nowrap;
 
   @media (max-width: ${mobile}) {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 `;
 
 const Rectangle = styled.div`
   align-self: center;
   background-color: rgba(255, 255, 255, 0.95);
-  height: 22px;
-  margin-bottom: 2px;
-  width: 20px;
+  height: 23px;
+  width: 21px;
+
+  @media (max-width: ${mobile}) {
+    height: 18px;
+    width: 16px;
+    margin-bottom: 2px;
+  }
 `;
 
 const credits = [
   {
-    key: 'built-by',
-    lines: ['Built by', 'JUKKA HOPEAVUORI'],
-    mt: '4rem',
+    key: 'name',
+    lines: ['Name', 'JUKKA HOPEAVUORI'],
+    bottom: '5rem',
   },
   {
-    key: 'built-with',
-    lines: ['Built with', 'GATSBY'],
-    mt: '10rem',
+    key: 'born',
+    lines: ['Date of birth', 'May 1989'],
+    top: '5rem',
+  },
+  {
+    key: 'occupation',
+    lines: ['Occupation', 'DEVELOPER'],
+    bottom: '5rem',
+  },
+  {
+    key: 'location',
+    lines: ['Location', 'HELSINKI'],
+    top: '5rem',
   },
 ];
 
@@ -188,14 +212,14 @@ const Intro = () => {
   );
 
   if (!credits || credits.length === 0) {
-    return null;
+    return <Container />;
   }
 
   if (!credit) {
-    return null;
+    return <Container />;
   }
 
-  const { lines, mt } = credit;
+  const { bottom, lines, top } = credit;
   const key = `${loopCount}_${credit.key}`;
 
   return (
@@ -205,10 +229,10 @@ const Intro = () => {
         <TransitionGroup>
           <CSSTransition key={key} timeout={1150} classNames="credit">
             <Delay timeout={1200}>
-              <Credit style={{ marginTop: mt }}>
+              <Credit top={top} bottom={bottom}>
                 {lines.map((line, index) => (
                   <CreditLine key={index}>
-                    <Delay timeout={index * typingDuration}>
+                    <Delay timeout={index * typingDuration + 100}>
                       <WriterContainer>
                         <Rectangle
                           className={
