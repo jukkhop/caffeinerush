@@ -22,7 +22,7 @@ const Children = styled.div`
   height: calc(100vh - 235px);
 
   @media (max-width: ${mobile}) {
-    height: calc(100vh - 347px);
+    height: calc(100vh - 325px);
   }
 `;
 
