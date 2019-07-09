@@ -7,13 +7,13 @@ import Header from './header';
 import Footer from './footer';
 import './layout.css';
 
-const mobile = '576px';
+const medium = '576px';
 
 const Body = styled.main`
   margin: auto;
   padding: 2rem 2rem 0rem;
 
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${medium}) {
     padding: 2rem 0.5rem 0rem;
   }
 `;
@@ -21,7 +21,7 @@ const Body = styled.main`
 const Children = styled.div`
   height: calc(100vh - 235px);
 
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${medium}) {
     height: calc(100vh - 325px);
   }
 `;

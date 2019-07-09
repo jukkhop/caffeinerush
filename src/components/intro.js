@@ -10,8 +10,8 @@ import {
   ModernVisionWOFF,
 } from '../utils/fonts';
 
-const desktop = '960px';
-const mobile = '576px';
+const large = '960px';
+const medium = '576px';
 const small = '275px';
 
 const typingDuration = 350;
@@ -108,11 +108,11 @@ const Container = styled.div`
   width: 400px;
   margin: 0 auto;
 
-  @media (max-width: ${desktop}) {
+  @media (max-width: ${large}) {
     padding-top: 2rem;
   }
 
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${medium}) {
     width: 274px;
   }
 
@@ -132,13 +132,13 @@ const Credit = styled.div`
   top: ${x => x.top || 'auto'};
   width: 400px;
 
-  @media (max-width: ${desktop}) {
+  @media (max-width: ${large}) {
     bottom: 0;
     min-height: 64px;
     top: 0;
   }
 
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${medium}) {
     width: 274px;
   }
 
@@ -167,7 +167,7 @@ const Rectangle = styled.div`
   height: 23px;
   width: 21px;
 
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${medium}) {
     height: 18px;
     width: 16px;
     margin-bottom: 2px;
@@ -186,7 +186,7 @@ const Writer = styled.div`
   overflow: hidden;
   white-space: nowrap;
 
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${medium}) {
     font-size: 1.75rem;
   }
 `;

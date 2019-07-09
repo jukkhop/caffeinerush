@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const large = '960px';
+
 const Container = styled.footer`
   margin: 0 auto;
-  max-width: 960px;
+  max-width: ${large};
   width: 100%;
 `;
 

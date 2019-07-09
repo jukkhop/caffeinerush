@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-const mobile = '576px';
+const large = '960px';
+const medium = '576px';
 
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 960px;
+  max-width: ${large};
   padding: 0.25rem 1.0875rem;
   width: 100%;
 `;
@@ -42,8 +43,11 @@ const Bottom = styled.div`
   margin-top: 0.75rem;
   width: 100%;
 
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${medium}) {
+    align-content: center;
+    align-items: center;
     flex-direction: column;
+    justify-content: center;
   }
 `;
 

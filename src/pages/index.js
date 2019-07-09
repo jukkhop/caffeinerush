@@ -9,7 +9,8 @@ import SEO from '../components/seo';
 
 // const Introduction = styled.article``;
 
-const mobile = '576px';
+const large = '960px';
+const medium = '576px';
 
 const Content = styled.div`
   align-items: center;
@@ -17,10 +18,10 @@ const Content = styled.div`
   flex-direction: row;
   justify-content: center;
   padding-top: 5rem;
-  max-width: 960px;
+  max-width: ${large};
   margin: 0 auto;
 
-  @media (max-width: 960px) {
+  @media (max-width: ${large}) {
     flex-direction: column-reverse;
     padding-top: 0;
   }
@@ -38,7 +39,7 @@ const ImgWrapper = styled.div`
     border-radius: 50%;
   }
 
-  @media (max-width: ${mobile}) {
+  @media (max-width: ${medium}) {
     width: 175px;
   }
 `;
