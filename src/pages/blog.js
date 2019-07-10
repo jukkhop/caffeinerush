@@ -30,7 +30,7 @@ const BlogPage = ({ data, location }) => {
   return (
     <Layout location={location} theme={themes.light}>
       <SEO
-        title="Posts"
+        title="Blog"
         keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
       />
       <Content>
@@ -38,7 +38,7 @@ const BlogPage = ({ data, location }) => {
         <div className="posts">
           {posts.map(({ node: post }) => (
             <div key={post.id}>
-              <Link to={`/posts/${post.slug}`}>{post.title}</Link>
+              <Link to={`/blog/${post.slug}`}>{post.title}</Link>
             </div>
           ))}
         </div>
