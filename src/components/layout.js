@@ -15,7 +15,7 @@ const BodyStyle = createGlobalStyle`
   }
 `;
 
-const Body = styled.main`
+const Main = styled.main`
   margin: 0 auto;
   max-width: ${breakpoints.large};
   width: 100%;
@@ -26,7 +26,7 @@ const Children = styled.div`
   padding: 6.5rem 1.0875rem 0;
 
   @media (max-width: ${breakpoints.medium}) {
-    min-height: calc(100vh - 275px);
+    min-height: calc(100vh - 280px);
     padding: 2rem 0.625rem 0rem;
   }
 
@@ -51,10 +51,10 @@ const Layout = ({ children, theme }) => (
         <>
           <BodyStyle />
           <Header siteTitle={data.site.siteMetadata.title} />
-          <Body>
+          <Main>
             <Children>{children}</Children>
             <Footer />
-          </Body>
+          </Main>
         </>
       </ThemeProvider>
     )}

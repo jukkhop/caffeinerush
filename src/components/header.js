@@ -18,9 +18,9 @@ const Top = styled.div`
 const Stripe = styled.div`
   background: linear-gradient(
     90deg,
-    transparent 0%,
+    ${x => x.theme.bg} 0%,
     rgba(212, 0, 120, ${x => x.alpha}) 50%,
-    transparent 100%
+    ${x => x.theme.bg} 100%
   );
 
   height: 3px;
