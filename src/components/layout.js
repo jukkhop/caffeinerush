@@ -26,7 +26,7 @@ const Children = styled.div`
   padding: 6.5rem 1.0875rem 0;
 
   @media (max-width: ${breakpoints.medium}) {
-    min-height: calc(100vh - 280px);
+    min-height: calc(100vh - 285px);
     padding: 2rem 0.625rem 0rem;
   }
 
