@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import { breakpoints, themes } from '../constants/styles';
 
 export const query = graphql`
   query($slug: String!) {
@@ -24,7 +25,16 @@ export const query = graphql`
   }
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  @media (max-width: ${breakpoints.large}) {
+    flex-direction: column-reverse;
+  }
+`;
 
 const Title = styled.h1``;
 
@@ -37,7 +47,7 @@ const Body = styled.p``;
 const Post = ({ data }) => {
   const { title, body, image } = data.contentfulBlogPost;
   return (
-    <Layout>
+    <Layout theme={themes.light}>
       <SEO title={title} />
       <Content>
         <Title>{title}</Title>
@@ -46,10 +56,7 @@ const Post = ({ data }) => {
         </ImgContainer>
         <Body>{body.body}</Body>
         <div>
-          <Link to="/posts">View more posts</Link>
-        </div>
-        <div>
-          <Link to="/">Back to Home</Link>
+          <Link to="/blog">View all posts</Link>
         </div>
       </Content>
     </Layout>

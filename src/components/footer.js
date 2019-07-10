@@ -1,28 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const large = '960px';
+import { breakpoints } from '../constants/styles';
 
 const Container = styled.footer`
   margin: 0 auto;
-  max-width: ${large};
+  max-width: ${breakpoints.large};
   width: 100%;
+  padding: 0rem 1.0875rem 0.25rem;
 `;
 
 const Links = styled.div`
   display: flex;
   justify-content: space-evenly;
-  max-width: 450px;
   margin: 0 auto;
+  max-width: 450px;
 `;
 
 const Link = styled.div`
   a {
     background-image: none;
-    color: white;
+    color: ${x => x.theme.fg};
     cursor: pointer;
-    font-family: Varela Round;
-    font-size: 10px;
+    font-family: 'Varela Round';
+    font-size: 0.527rem;
     letter-spacing: 1.75px;
     text-decoration: none;
     text-shadow: none;
@@ -34,8 +34,8 @@ const Link = styled.div`
       to top,
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0) 1px,
-      white 1px,
-      white 2px,
+      ${x => x.theme.fg} 1px,
+      ${x => x.theme.fg} 2px,
       rgba(0, 0, 0, 0) 2px
     );
   }
@@ -49,9 +49,9 @@ const Stripes = styled.div`
 const Stripe = styled.div`
   background: linear-gradient(
     90deg,
-    rgba(40, 30, 59, 1) 0%,
+    transparent 0%,
     rgba(253, 55, 119, ${x => x.alpha}) 50%,
-    rgba(40, 30, 59, 1) 100%
+    transparent 100%
   );
 
   height: 3px;

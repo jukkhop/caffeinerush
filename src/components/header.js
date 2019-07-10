@@ -2,14 +2,12 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-
-const large = '960px';
-const medium = '576px';
+import { breakpoints } from '../constants/styles';
 
 const Container = styled.div`
   margin: 0 auto;
-  max-width: ${large};
-  padding: 0.25rem 1.0875rem;
+  max-width: ${breakpoints.large};
+  padding: 0.25rem 1.0875rem 0;
   width: 100%;
 `;
 
@@ -20,9 +18,9 @@ const Top = styled.div`
 const Stripe = styled.div`
   background: linear-gradient(
     90deg,
-    rgba(40, 30, 59, 1) 0%,
+    transparent 0%,
     rgba(212, 0, 120, ${x => x.alpha}) 50%,
-    rgba(40, 30, 59, 1) 100%
+    transparent 100%
   );
 
   height: 3px;
@@ -43,7 +41,7 @@ const Bottom = styled.div`
   margin-top: 0.75rem;
   width: 100%;
 
-  @media (max-width: ${medium}) {
+  @media (max-width: ${breakpoints.medium}) {
     align-content: center;
     align-items: center;
     flex-direction: column;
@@ -58,7 +56,7 @@ const Title = styled.h1`
 
 const TitleLink = styled(Link)`
   background-image: none;
-  color: white;
+  color: ${x => x.theme.headerFg};
   text-decoration: none;
   text-shadow: none;
 `;
@@ -76,30 +74,36 @@ const Nav = styled.li`
   margin-bottom: 0;
 
   a {
-    background-image: none;
-    color: white;
-    cursor: pointer;
-    font-family: Varela Round;
-    font-size: 10px;
-    letter-spacing: 2.25px;
-    text-decoration: none;
-    text-shadow: none;
-    text-transform: uppercase;
-  }
-
-  a:hover {
     background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0) 1px,
-      white 1px,
-      white 2px,
+      ${x => x.theme.fg} 1px,
+      ${x => x.theme.fg} 2px,
       rgba(0, 0, 0, 0) 2px
     );
+
+    text-shadow: 0.03em 0 ${x => x.theme.bg}, -0.03em 0 ${x => x.theme.bg},
+      0 0.03em ${x => x.theme.bg}, 0 -0.03em ${x => x.theme.bg},
+      0.06em 0 ${x => x.theme.bg}, -0.06em 0 ${x => x.theme.bg},
+      0.09em 0 ${x => x.theme.bg}, -0.09em 0 ${x => x.theme.bg},
+      0.12em 0 ${x => x.theme.bg}, -0.12em 0 ${x => x.theme.bg},
+      0.15em 0 ${x => x.theme.bg}, -0.15em 0 ${x => x.theme.bg};
+
+    color: ${x => x.theme.fg};
+    cursor: pointer;
+    font-family: 'Varela Round';
+    font-size: 0.737rem;
+    letter-spacing: 2.25px;
+    text-transform: none;
+  }
+
+  a:hover {
+    background-image: none;
   }
 
   &:not(:last-of-type) {
-    margin-right: 2rem;
+    margin-right: 3rem;
   }
 `;
 

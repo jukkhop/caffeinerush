@@ -1,7 +1,9 @@
 import { Delay } from 'animate-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled, { createGlobalStyle } from 'styled-components';
+
+import { breakpoints } from '../constants/styles';
 
 import {
   ModernVisionEOT,
@@ -9,10 +11,6 @@ import {
   ModernVisionTTF,
   ModernVisionWOFF,
 } from '../utils/fonts';
-
-const large = '960px';
-const medium = '576px';
-const small = '275px';
 
 const typingDuration = 350;
 const fadeOutDelay = 5000;
@@ -99,7 +97,7 @@ const Keyframes = createGlobalStyle`
 
 const Container = styled.div`
   align-self: flex-start;
-  background-color: #281e3b;
+  background-color: ${x => x.theme.bg};
   display: flex;
   flex-basis: 50%;
   height: 100%;
@@ -107,19 +105,19 @@ const Container = styled.div`
   width: 400px;
   margin: 0 auto;
 
-  @media (max-width: ${large}) {
+  @media (max-width: ${breakpoints.large}) {
     padding-top: 2.25rem;
   }
 
-  @media (max-width: ${medium}) {
+  @media (max-width: ${breakpoints.medium}) {
     width: 274px;
   }
 
-  @media (max-width: ${small}) {
+  @media (max-width: ${breakpoints.small}) {
     width: auto;
   }
 
-  @media (max-height: 641px) {
+  @media (max-height: ${breakpoints.mediumHeight}) {
     align-self: center;
     padding-top: 1.5rem;
   }
@@ -135,21 +133,21 @@ const Credit = styled.div`
   top: ${x => x.top || 'auto'};
   width: 400px;
 
-  @media (max-width: ${large}) {
+  @media (max-width: ${breakpoints.large}) {
     bottom: 0;
     min-height: 64px;
     top: 0;
   }
 
-  @media (max-width: ${medium}) {
+  @media (max-width: ${breakpoints.medium}) {
     width: 274px;
   }
 
-  @media (max-width: ${small}) {
+  @media (max-width: ${breakpoints.small}) {
     width: auto;
   }
 
-  @media (max-height: 641px) {
+  @media (max-height: ${breakpoints.mediumHeight}) {
     bottom: 0;
     min-height: 64px;
     top: 0;
@@ -166,11 +164,11 @@ const WriterContainer = styled.div`
 
 const Rectangle = styled.div`
   align-self: center;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: ${x => x.theme.introFg};
   height: 23px;
   width: 21px;
 
-  @media (max-width: ${medium}) {
+  @media (max-width: ${breakpoints.medium}) {
     height: 18px;
     width: 16px;
     margin-bottom: 2px;
@@ -180,7 +178,7 @@ const Rectangle = styled.div`
 const Writer = styled.div`
   animation: typing ${x => x.duration}ms steps(${x => x.length});
   box-sizing: border-box;
-  color: rgba(255, 255, 255, 0.95);
+  color: ${x => x.theme.introFg};
   font-family: Modern-Vision;
   font-size: 2.25rem;
   letter-spacing: 0.75px;
@@ -189,7 +187,7 @@ const Writer = styled.div`
   overflow: hidden;
   white-space: nowrap;
 
-  @media (max-width: ${medium}) {
+  @media (max-width: ${breakpoints.medium}) {
     font-size: 1.75rem;
   }
 `;
@@ -223,6 +221,8 @@ const Intro = () => {
     loopCount: 0,
   });
 
+  const timer = useRef(null);
+
   useEffect(
     () => {
       const index = credits.indexOf(credit);
@@ -236,9 +236,13 @@ const Intro = () => {
         loopCount: incrLoop ? loopCount + 1 : loopCount,
       };
 
-      setTimeout(() => {
+      timer.current = setTimeout(() => {
         setState(nextState);
       }, timeout);
+
+      return () => {
+        clearTimeout(timer.current);
+      };
     },
     [credit, loopCount],
   );

@@ -6,28 +6,18 @@ import styled from 'styled-components';
 import Intro from '../components/intro';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-
-// const Introduction = styled.article``;
-
-const large = '960px';
-const medium = '576px';
+import { breakpoints, themes } from '../constants/styles';
 
 const Content = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 5rem;
-  max-width: ${large};
+  max-width: ${breakpoints.large};
   margin: 0 auto;
 
-  @media (max-width: ${large}) {
+  @media (max-width: ${breakpoints.large}) {
     flex-direction: column-reverse;
-    padding-top: 0;
-  }
-
-  @media (max-height: 641px) {
-    padding-top: 0rem;
   }
 `;
 
@@ -39,13 +29,13 @@ const ImgWrapper = styled.div`
     border-radius: 50%;
   }
 
-  @media (max-width: ${medium}) {
+  @media (max-width: ${breakpoints.medium}) {
     width: 175px;
   }
 `;
 
 const IndexPage = () => (
-  <Layout>
+  <Layout theme={themes.dark}>
     <SEO
       title="Home"
       keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
