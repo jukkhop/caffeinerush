@@ -106,7 +106,7 @@ const Container = styled.div`
   margin: 0 auto;
 
   @media (max-width: ${breakpoints.large}) {
-    padding-top: 2.25rem;
+    padding-top: 3rem;
   }
 
   @media (max-width: ${breakpoints.medium}) {
