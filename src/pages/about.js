@@ -17,13 +17,13 @@ const Content = styled.div`
   }
 
   p {
-    font-size: 0.7895rem;
+    font-size: 0.948rem;
     margin-bottom: 0;
     padding-bottom: 1.25rem;
   }
 
   li {
-    font-size: 0.7895rem;
+    font-size: 0.948rem;
     margin-bottom: 0.25rem;
   }
 

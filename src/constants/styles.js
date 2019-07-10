@@ -15,7 +15,7 @@ export const themes = {
   },
   light: {
     bg: 'white',
-    fg: 'rgba(0, 0, 0, 0.9)',
+    fg: 'rgba(0, 0, 0, 0.8)',
     introFg: 'rgba(0, 0, 0, 0.8)',
     headerFg: 'rgba(0, 0, 0, 0.79)',
     linkColorActive: '#d40078',
