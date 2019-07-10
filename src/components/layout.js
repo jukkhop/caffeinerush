@@ -35,7 +35,7 @@ const Children = styled.div`
   }
 `;
 
-const Layout = ({ children, theme }) => (
+const Layout = ({ children, location, theme }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -50,7 +50,11 @@ const Layout = ({ children, theme }) => (
       <ThemeProvider theme={theme}>
         <>
           <BodyStyle />
-          <Header siteTitle={data.site.siteMetadata.title} />
+          <Header
+            location={location}
+            siteTitle={data.site.siteMetadata.title}
+            theme={theme}
+          />
           <Main>
             <Children>{children}</Children>
             <Footer />
@@ -63,6 +67,7 @@ const Layout = ({ children, theme }) => (
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  location: PropTypes.shape({}).isRequired,
   theme: PropTypes.shape({}).isRequired,
 };
 

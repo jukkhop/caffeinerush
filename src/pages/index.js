@@ -34,8 +34,8 @@ const ImgWrapper = styled.div`
   }
 `;
 
-const IndexPage = () => (
-  <Layout theme={themes.dark}>
+const IndexPage = ({ location }) => (
+  <Layout location={location} theme={themes.dark}>
     <SEO
       title="Home"
       keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}

@@ -26,17 +26,8 @@ export const query = graphql`
 `;
 
 const Content = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
-  @media (max-width: ${breakpoints.large}) {
-    flex-direction: column-reverse;
-  }
+  max-width: 55ch;
 `;
-
-const Title = styled.h1``;
 
 const ImgContainer = styled.div`
   max-width: 300px;
@@ -44,13 +35,13 @@ const ImgContainer = styled.div`
 
 const Body = styled.p``;
 
-const Post = ({ data }) => {
+const Post = ({ data, location }) => {
   const { title, body, image } = data.contentfulBlogPost;
   return (
-    <Layout theme={themes.light}>
+    <Layout theme={themes.light} location={location}>
       <SEO title={title} />
       <Content>
-        <Title>{title}</Title>
+        <h2>{title}</h2>
         <ImgContainer>
           <Img alt={title} fluid={image.fluid} />
         </ImgContainer>

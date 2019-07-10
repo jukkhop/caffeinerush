@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { breakpoints, themes } from '../constants/styles';
+import { themes } from '../constants/styles';
 
 export const query = graphql`
   query {
@@ -21,42 +21,26 @@ export const query = graphql`
 `;
 
 const Content = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  max-width: ${breakpoints.large};
-  margin: 0 auto;
-
-  @media (max-width: ${breakpoints.large}) {
-    flex-direction: column-reverse;
-    padding-top: 0;
-  }
-
-  @media (max-height: ${breakpoints.mediumHeight}) {
-    padding-top: 0rem;
-  }
+  max-width: 55ch;
 `;
 
-const BlogPage = ({ data }) => {
+const BlogPage = ({ data, location }) => {
   const posts = data.allContentfulBlogPost.edges;
 
   return (
-    <Layout theme={themes.light}>
+    <Layout location={location} theme={themes.light}>
       <SEO
         title="Posts"
         keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
       />
       <Content>
-        <h2>{"Here's a list of all posts!"}</h2>
+        <h2>All blog posts</h2>
         <div className="posts">
           {posts.map(({ node: post }) => (
             <div key={post.id}>
               <Link to={`/posts/${post.slug}`}>{post.title}</Link>
             </div>
           ))}
-          <span className="mgBtm__24" />
-          <Link to="/">Go back</Link>
         </div>
       </Content>
     </Layout>

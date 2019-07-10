@@ -55,10 +55,13 @@ const Title = styled.h1`
 `;
 
 const TitleLink = styled(Link)`
-  background-image: none;
   color: ${x => x.theme.headerFg};
   text-decoration: none;
-  text-shadow: none;
+
+  &:hover {
+    background-image: none !important;
+    text-shadow: none !important;
+  }
 `;
 
 const Navs = styled.ul`
@@ -74,13 +77,26 @@ const Nav = styled.li`
   margin-bottom: 0;
 
   a {
+    background-image: none;
+    color: ${x => x.fg};
+    cursor: pointer;
+    font-family: 'Varela Round';
+    font-size: 0.737rem;
+    letter-spacing: 2.25px;
+    text-shadow: none;
+    text-transform: none;
+  }
+
+  a:hover,
+  a.active,
+  a.active:hover {
     background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0) 1px,
-      ${x => x.theme.fg} 1px,
-      ${x => x.theme.fg} 2px,
-      rgba(0, 0, 0, 0) 2px
+      rgba(0, 0, 0, 0) 0px,
+      ${x => x.fg} 0px,
+      ${x => x.fg} 1px,
+      rgba(0, 0, 0, 0) 1px
     );
 
     text-shadow: 0.03em 0 ${x => x.theme.bg}, -0.03em 0 ${x => x.theme.bg},
@@ -89,17 +105,6 @@ const Nav = styled.li`
       0.09em 0 ${x => x.theme.bg}, -0.09em 0 ${x => x.theme.bg},
       0.12em 0 ${x => x.theme.bg}, -0.12em 0 ${x => x.theme.bg},
       0.15em 0 ${x => x.theme.bg}, -0.15em 0 ${x => x.theme.bg};
-
-    color: ${x => x.theme.fg};
-    cursor: pointer;
-    font-family: 'Varela Round';
-    font-size: 0.737rem;
-    letter-spacing: 2.25px;
-    text-transform: none;
-  }
-
-  a:hover {
-    background-image: none;
   }
 
   &:not(:last-of-type) {
@@ -107,7 +112,18 @@ const Nav = styled.li`
   }
 `;
 
-const Header = ({ siteTitle }) => (
+const navs = [
+  {
+    to: '/about',
+    text: 'about',
+  },
+  {
+    to: '/blog',
+    text: 'blog',
+  },
+];
+
+const Header = ({ location, siteTitle, theme }) => (
   <Container>
     <Top>
       <Stripe width="100%" alpha={1} />
@@ -121,12 +137,19 @@ const Header = ({ siteTitle }) => (
       </Title>
       <nav>
         <Navs>
-          <Nav>
-            <Link to="/about">about</Link>
-          </Nav>
-          <Nav>
-            <Link to="/blog">blog</Link>
-          </Nav>
+          {navs.map(nav => {
+            const active = location.pathname.includes(nav.to);
+            const fg = active ? theme.linkColorActive : theme.fg;
+            const className = active ? 'active' : '';
+
+            return (
+              <Nav key={nav.text} fg={fg}>
+                <Link className={className} to={nav.to}>
+                  {nav.text}
+                </Link>
+              </Nav>
+            );
+          })}
         </Navs>
       </nav>
     </Bottom>
@@ -134,6 +157,7 @@ const Header = ({ siteTitle }) => (
 );
 
 Header.propTypes = {
+  location: PropTypes.shape({}).isRequired,
   siteTitle: PropTypes.string,
 };
 
