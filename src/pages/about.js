@@ -28,6 +28,7 @@ const Content = styled.div`
   }
 
   span {
+    color: black;
     font-size: 1rem;
   }
 `;
@@ -41,12 +42,7 @@ const AboutPage = ({ location }) => {
       />
       <Content>
         <h2>Hello!</h2>
-        <p>
-          Welcome to my personal introductory page.{' '}
-          <span aria-label="waving hand" role="img">
-            👋
-          </span>
-        </p>
+        <p>Welcome to my personal introductory page.</p>
         <p>
           My name is Jukka and I develop software for a living, and as a hobby.
           I am 30 years old and live in Helsinki, Finland. Currently I work at{' '}
@@ -66,12 +62,7 @@ const AboutPage = ({ location }) => {
           You can also check out my <Link to="/blog">blog</Link>, there may or
           may not be any posts written in there.
         </p>
-        <p>
-          All right, take care!{' '}
-          <span aria-label="winking face" role="img">
-            😉
-          </span>
-        </p>
+        <p>All right, take care!</p>
       </Content>
     </Layout>
   );

@@ -139,7 +139,7 @@ const Header = ({ location, siteTitle, theme }) => (
         <Navs>
           {navs.map(nav => {
             const active = location && location.pathname.includes(nav.to);
-            const fg = active ? theme.linkColorActive : theme.fg;
+            const fg = active ? theme.linkColor : theme.fg;
             const className = active ? 'active' : '';
 
             return (

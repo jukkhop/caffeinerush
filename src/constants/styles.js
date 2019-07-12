@@ -11,13 +11,13 @@ export const themes = {
     fg: 'white',
     introFg: 'rgba(255, 255, 255, 0.95)',
     headerFg: 'white',
-    linkColorActive: '#d40078',
+    linkColor: '#d40078',
   },
   light: {
     bg: 'white',
     fg: 'rgba(0, 0, 0, 0.8)',
     introFg: 'rgba(0, 0, 0, 0.8)',
     headerFg: 'rgba(0, 0, 0, 0.79)',
-    linkColorActive: '#d40078',
+    linkColor: '#d40078',
   },
 };

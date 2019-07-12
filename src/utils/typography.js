@@ -3,6 +3,9 @@ import gray from 'gray-percentage';
 import Typography from 'typography';
 import { MOBILE_MEDIA_QUERY } from 'typography-breakpoint-constants';
 
+import { themes } from '../constants/styles';
+const { linkColor } = themes.light;
+
 const theme = {
   baseFontSize: '19px',
   baseLineHeight: 1.58,
@@ -24,7 +27,6 @@ const theme = {
   bodyWeight: 400,
   boldWeight: 700,
   overrideStyles: ({ adjustFontSizeTo, scale, rhythm }, options) => {
-    const linkColor = '#d40078';
     const vr = verticalRhythm({
       baseFontSize: '17px',
       baseLineHeight: '28px',
