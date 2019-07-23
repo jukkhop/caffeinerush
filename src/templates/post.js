@@ -42,9 +42,11 @@ const Post = ({ data, location }) => {
       <SEO title={title} />
       <Content>
         <h2>{title}</h2>
-        <ImgContainer>
-          <Img alt={title} fluid={image.fluid} />
-        </ImgContainer>
+        {image && (
+          <ImgContainer>
+            <Img alt={title} fluid={image.fluid} />
+          </ImgContainer>
+        )}
         <Body>{body.body}</Body>
         <div>
           <Link to="/blog">View all posts</Link>
