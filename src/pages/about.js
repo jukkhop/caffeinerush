@@ -1,6 +1,3 @@
-// import { StaticQuery, graphql } from 'gatsby';
-// import Img from 'gatsby-image';
-
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
@@ -25,11 +22,6 @@ const Content = styled.div`
   li {
     font-size: 0.948rem;
     margin-bottom: 0.25rem;
-  }
-
-  span {
-    color: black;
-    font-size: 1rem;
   }
 `;
 

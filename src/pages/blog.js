@@ -22,6 +22,16 @@ export const query = graphql`
 
 const Content = styled.div`
   max-width: 55ch;
+
+  p:first-of-type {
+    margin-top: 1.75rem;
+  }
+
+  p {
+    font-size: 0.948rem;
+    margin-bottom: 0;
+    padding-bottom: 1.25rem;
+  }
 `;
 
 const BlogPage = ({ data, location }) => {
@@ -34,7 +44,7 @@ const BlogPage = ({ data, location }) => {
         keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
       />
       <Content>
-        <h2>All blog posts</h2>
+        <h2>All posts</h2>
         <div className="posts">
           {posts.map(({ node: post }) => (
             <div key={post.id}>

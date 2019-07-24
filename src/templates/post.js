@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import React from 'react';
 import styled from 'styled-components';
 
 import Layout from '../components/layout';
@@ -11,7 +11,9 @@ export const query = graphql`
   query($slug: String!) {
     contentfulBlogPost(slug: { eq: $slug }) {
       body {
-        body
+        childMarkdownRemark {
+          html
+        }
       }
       image {
         fluid {
@@ -26,31 +28,39 @@ export const query = graphql`
 `;
 
 const Content = styled.div`
-  max-width: 55ch;
+  max-width: 60ch;
+  padding-bottom: 5rem;
+
+  p {
+    font-size: 0.948rem;
+  }
 `;
 
 const ImgContainer = styled.div`
-  max-width: 300px;
+  max-width: 600px;
+  margin: 2.5rem 0rem;
 `;
 
-const Body = styled.p``;
+const Body = styled.div`
+  margin-top: 1.75rem;
+`;
 
 const Post = ({ data, location }) => {
   const { title, body, image } = data.contentfulBlogPost;
   return (
     <Layout theme={themes.light} location={location}>
       <SEO title={title} />
+      <Link to="/blog">View all posts</Link>
       <Content>
-        <h2>{title}</h2>
         {image && (
           <ImgContainer>
             <Img alt={title} fluid={image.fluid} />
           </ImgContainer>
         )}
-        <Body>{body.body}</Body>
-        <div>
-          <Link to="/blog">View all posts</Link>
-        </div>
+        <h1>{title}</h1>
+        <Body
+          dangerouslySetInnerHTML={{ __html: body.childMarkdownRemark.html }}
+        />
       </Content>
     </Layout>
   );
