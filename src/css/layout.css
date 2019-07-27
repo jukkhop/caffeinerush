@@ -481,8 +481,9 @@ code:before,
 code:after,
 tt:before,
 tt:after {
-  letter-spacing: -0.2em;
   content: ' ';
+  letter-spacing: -0.2em;
+  white-space: pre-wrap;
 }
 pre code:before,
 pre code:after,

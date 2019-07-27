@@ -1,9 +1,14 @@
 {
+  "author": "Jukka Hopeavuori <jukka.hopea@gmail.com>",
+  "description": "Personal home page",
+  "license": "MIT",
   "name": "caffeinerush",
   "private": true,
-  "description": "Personal home page",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jukkhop/caffeinerush"
+  },
   "version": "1.0.0",
-  "author": "Jukka Hopeavuori <jukka.hopea@gmail.com>",
   "dependencies": {
     "animate-components": "^1.4.8",
     "babel-eslint": "^10.0.2",
@@ -22,6 +27,7 @@
     "gatsby-source-filesystem": "^2.0.39",
     "gatsby-transformer-remark": "^2.4.0",
     "gatsby-transformer-sharp": "^2.1.21",
+    "moment": "^2.24.0",
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -32,14 +38,6 @@
     "typography": "^0.16.19",
     "typography-breakpoint-constants": "^0.16.19"
   },
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "npm run develop",
-    "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
-  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-react-app": "^4.0.1",
@@ -48,10 +46,13 @@
     "eslint-plugin-jsx-a11y": "^6.2.2",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-react-hooks": "^1.6.1",
+    "gatsby-plugin-catch-links": "^2.1.2",
     "prettier": "^1.15.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jukkhop/caffeinerush"
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"src/**/*.js\"",
+    "start": "npm run develop"
   }
 }

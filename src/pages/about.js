@@ -1,4 +1,4 @@
-import { Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -6,8 +6,22 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { themes } from '../constants/styles';
 
+export const query = graphql`
+  query {
+    contentfulAboutPage {
+      body {
+        body
+      }
+    }
+  }
+`;
+
 const Content = styled.div`
   max-width: 55ch;
+
+  h1 {
+    margin-top: 0;
+  }
 
   p:first-of-type {
     margin-top: 1.75rem;
@@ -25,7 +39,8 @@ const Content = styled.div`
   }
 `;
 
-const AboutPage = ({ location }) => {
+const AboutPage = ({ data, location }) => {
+  const { body } = data.contentfulAboutPage;
   return (
     <Layout theme={themes.light} location={location}>
       <SEO
@@ -33,28 +48,7 @@ const AboutPage = ({ location }) => {
         keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
       />
       <Content>
-        <h2>Hello!</h2>
-        <p>Welcome to my personal introductory page.</p>
-        <p>
-          My name is Jukka and I develop software for a living, and as a hobby.
-          I am 30 years old and live in Helsinki, Finland. Currently I work at{' '}
-          <a href="https://motley.fi/">Motley</a>, which is foremost an
-          innovation agency.
-        </p>
-        <p>
-          One of the main reasons I made this website was to try out some new
-          tech. This website was built with{' '}
-          <a href="https://www.gatsbyjs.org/">Gatsby</a>, which is a React-based
-          static site generator. Content is fetched at build-time from{' '}
-          <a href="https://www.contentful.com/">Contentful</a>. The entire CI/CD
-          pipeline and hosting is handled by{' '}
-          <a href="https://www.netlify.com/">Netlify</a>.
-        </p>
-        <p>
-          You can also check out my <Link to="/blog">blog</Link>, there may or
-          may not be any posts written in there.
-        </p>
-        <p>All right, take care!</p>
+        <div dangerouslySetInnerHTML={{ __html: body.body }} />
       </Content>
     </Layout>
   );

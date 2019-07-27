@@ -1,3 +1,3 @@
-<h1 align="center">
-  caffeinerush
-</h1>
+<h1>caffeinerush</h1>
+<p>Personal introductory and blog</p>
+<a href="https://caffeinerush.dev">caffeinerush</a>

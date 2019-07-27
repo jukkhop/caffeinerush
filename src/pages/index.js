@@ -1,4 +1,4 @@
-import { StaticQuery, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
@@ -7,6 +7,23 @@ import Intro from '../components/intro';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { breakpoints, themes } from '../constants/styles';
+
+export const query = graphql`
+  query {
+    contentfulIndexPage {
+      author {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
+      }
+      credits {
+        key
+        lines
+        top
+      }
+    }
+  }
+`;
 
 const Content = styled.div`
   align-items: center;
@@ -34,29 +51,16 @@ const ImgWrapper = styled.div`
   }
 `;
 
-const IndexPage = ({ location }) => (
+const IndexPage = ({ data, location }) => (
   <Layout location={location} theme={themes.dark}>
     <SEO
       title="Home"
       keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
     />
     <Content>
-      <Intro />
+      <Intro credits={data.contentfulIndexPage.credits} />
       <ImgWrapper>
-        <StaticQuery
-          query={graphql`
-            query {
-              image: file(relativePath: { eq: "author.png" }) {
-                childImageSharp {
-                  fluid(maxWidth: 300) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-            }
-          `}
-          render={data => <Img fluid={data.image.childImageSharp.fluid} />}
-        />
+        <Img fluid={data.contentfulIndexPage.author.fluid} />
       </ImgWrapper>
     </Content>
   </Layout>

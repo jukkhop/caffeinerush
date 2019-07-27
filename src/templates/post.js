@@ -1,5 +1,6 @@
-import { Link, graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
+import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -9,12 +10,13 @@ import { themes } from '../constants/styles';
 
 export const query = graphql`
   query($slug: String!) {
-    contentfulBlogPost(slug: { eq: $slug }) {
+    contentfulPost(slug: { eq: $slug }) {
       body {
         childMarkdownRemark {
           html
         }
       }
+      createdAt
       image {
         fluid {
           ...GatsbyContentfulFluid
@@ -24,12 +26,19 @@ export const query = graphql`
       tags
       title
     }
+    contentfulPostTemplate {
+      navBackText
+    }
   }
 `;
 
 const Content = styled.div`
   max-width: 60ch;
   padding-bottom: 5rem;
+
+  p:first-of-type {
+    margin-top: 2.5rem;
+  }
 
   p {
     font-size: 0.948rem;
@@ -38,7 +47,18 @@ const Content = styled.div`
 
 const ImgContainer = styled.div`
   max-width: 600px;
-  margin: 2.5rem 0rem;
+  max-height: 200px;
+  margin: 2.5rem 0;
+
+  div,
+  img {
+    max-height: 200px;
+    object-fit: contain !important;
+  }
+`;
+
+const CreatedAt = styled.div`
+  font-size: 0.8175rem;
 `;
 
 const Body = styled.div`
@@ -46,11 +66,13 @@ const Body = styled.div`
 `;
 
 const Post = ({ data, location }) => {
-  const { title, body, image } = data.contentfulBlogPost;
+  const { navBackText } = data.contentfulPostTemplate;
+  const { createdAt, title, body, image } = data.contentfulPost;
+
   return (
     <Layout theme={themes.light} location={location}>
       <SEO title={title} />
-      <Link to="/blog">View all posts</Link>
+      <Link to="/blog">{navBackText}</Link>
       <Content>
         {image && (
           <ImgContainer>
@@ -58,6 +80,7 @@ const Post = ({ data, location }) => {
           </ImgContainer>
         )}
         <h1>{title}</h1>
+        <CreatedAt>{moment(createdAt).format('MMMM Do, YYYY')}</CreatedAt>
         <Body
           dangerouslySetInnerHTML={{ __html: body.childMarkdownRemark.html }}
         />

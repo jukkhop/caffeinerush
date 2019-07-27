@@ -112,18 +112,7 @@ const Nav = styled.li`
   }
 `;
 
-const navs = [
-  {
-    to: '/about',
-    text: 'about',
-  },
-  {
-    to: '/blog',
-    text: 'blog',
-  },
-];
-
-const Header = ({ location, siteTitle, theme }) => (
+const Header = ({ location, navs, title, theme }) => (
   <Container>
     <Top>
       <Stripe width="100%" alpha={1} />
@@ -133,7 +122,7 @@ const Header = ({ location, siteTitle, theme }) => (
     </Top>
     <Bottom>
       <Title>
-        <TitleLink to="/">{siteTitle}</TitleLink>
+        <TitleLink to="/">{title}</TitleLink>
       </Title>
       <nav>
         <Navs>
@@ -141,7 +130,6 @@ const Header = ({ location, siteTitle, theme }) => (
             const active = location && location.pathname.includes(nav.to);
             const fg = active ? theme.linkColor : theme.fg;
             const className = active ? 'active' : '';
-
             return (
               <Nav key={nav.text} fg={fg}>
                 <Link className={className} to={nav.to}>
@@ -157,8 +145,16 @@ const Header = ({ location, siteTitle, theme }) => (
 );
 
 Header.propTypes = {
+  title: PropTypes.string,
   location: PropTypes.shape({}).isRequired,
-  siteTitle: PropTypes.string,
+  navs: PropTypes.arrayOf(
+    PropTypes.shape({
+      to: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+
+  theme: PropTypes.shape({}).isRequired,
 };
 
 Header.defaultProps = {

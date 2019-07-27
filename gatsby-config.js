@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `caffeinerush`,
-    description: `Jukka Hopeavuori's introduction page and blog`,
+    description: `Personal about page and blog`,
     author: `@jukkhop`,
   },
   plugins: [
@@ -9,6 +9,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-catch-links`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     {
@@ -50,16 +51,5 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-prefetch-google-fonts`,
-    //   options: {
-    //     fonts: [
-    //       {
-    //         family: `Exo`,
-    //         variants: [`400`, `500`, `700`],
-    //       },
-    //     ],
-    //   },
-    // },
   ],
 };

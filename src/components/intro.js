@@ -4,7 +4,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled, { createGlobalStyle } from 'styled-components';
 
 import { breakpoints } from '../constants/styles';
-
 import {
   ModernVisionEOT,
   ModernVisionSVG,
@@ -192,30 +191,7 @@ const Writer = styled.div`
   }
 `;
 
-const credits = [
-  {
-    key: 'name',
-    lines: ['Name', 'JUKKA HOPEAVUORI'],
-    top: '1rem',
-  },
-  {
-    key: 'born',
-    lines: ['Date of birth', 'MAY 1989'],
-    top: '6rem',
-  },
-  {
-    key: 'occupation',
-    lines: ['Occupation', 'DEVELOPER'],
-    top: '1rem',
-  },
-  {
-    key: 'location',
-    lines: ['Location', 'HELSINKI, FINLAND'],
-    top: '6rem',
-  },
-];
-
-const Intro = () => {
+const Intro = ({ credits }) => {
   const [{ credit, loopCount }, setState] = useState({
     credit: null,
     loopCount: 0,
@@ -244,7 +220,7 @@ const Intro = () => {
         clearTimeout(timer.current);
       };
     },
-    [credit, loopCount],
+    [credits, credit, loopCount],
   );
 
   if (!credits || credits.length === 0) {

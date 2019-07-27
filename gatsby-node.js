@@ -1,9 +1,3 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
 const path = require(`path`);
 const slash = require(`slash`);
 
@@ -13,7 +7,7 @@ exports.createPages = async ({ graphql, actions }) => {
   try {
     const { data, errors } = await graphql(`
       {
-        allContentfulBlogPost {
+        allContentfulPost {
           edges {
             node {
               id
@@ -30,7 +24,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     const template = path.resolve('./src/templates/post.js');
 
-    data.allContentfulBlogPost.edges.forEach(({ node }) => {
+    data.allContentfulPost.edges.forEach(({ node }) => {
       createPage({
         path: `/blog/${node.slug}/`,
         component: slash(template),

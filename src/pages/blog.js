@@ -1,4 +1,6 @@
 import { Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
+import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -8,10 +10,16 @@ import { themes } from '../constants/styles';
 
 export const query = graphql`
   query {
-    allContentfulBlogPost(limit: 1000) {
+    allContentfulPost {
       edges {
         node {
+          createdAt
           id
+          image {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
+          }
           slug
           title
         }
@@ -20,23 +28,49 @@ export const query = graphql`
   }
 `;
 
-const Content = styled.div`
-  max-width: 55ch;
+const Content = styled.div``;
 
-  p:first-of-type {
-    margin-top: 1.75rem;
+const Post = styled.div`
+  align-items: center;
+  display: flex;
+  padding-bottom: 3rem;
+`;
+
+const Left = styled.div`
+  min-width: 15%;
+
+  div {
+    height: 65px;
   }
 
-  p {
-    font-size: 0.948rem;
-    margin-bottom: 0;
-    padding-bottom: 1.25rem;
+  img {
+    height: 65px;
+    width: auto;
+    object-fit: contain !important;
   }
 `;
 
-const BlogPage = ({ data, location }) => {
-  const posts = data.allContentfulBlogPost.edges;
+const Right = styled.div`
+  margin-left: 1.5rem;
+`;
 
+const Title = styled.h3`
+  margin-bottom: 0.35rem;
+  margin-top: 0;
+`;
+
+const CreatedAt = styled.div`
+  font-size: 0.8175rem;
+`;
+
+const mapPosts = edges =>
+  edges.map(({ node }) => ({
+    ...node,
+    createdAt: moment(node.createdAt).format('MMMM Do, YYYY'),
+  }));
+
+const BlogPage = ({ data, location }) => {
+  const posts = mapPosts(data.allContentfulPost.edges);
   return (
     <Layout location={location} theme={themes.light}>
       <SEO
@@ -44,12 +78,19 @@ const BlogPage = ({ data, location }) => {
         keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
       />
       <Content>
-        <h2>All posts</h2>
         <div className="posts">
-          {posts.map(({ node: post }) => (
-            <div key={post.id}>
-              <Link to={`/blog/${post.slug}`}>{post.title}</Link>
-            </div>
+          {posts.map(({ createdAt, id, image, slug, title }) => (
+            <Post key={id}>
+              <Left>
+                <Img alt={title} fluid={image.fluid} />
+              </Left>
+              <Right>
+                <Title>
+                  <Link to={`/blog/${slug}`}>{title}</Link>
+                </Title>
+                <CreatedAt>{createdAt}</CreatedAt>
+              </Right>
+            </Post>
           ))}
         </div>
       </Content>

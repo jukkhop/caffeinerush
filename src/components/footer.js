@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { breakpoints } from '../constants/styles';
@@ -64,20 +65,14 @@ const Stripe = styled.div`
   }
 `;
 
-const Footer = () => (
+const Footer = ({ links }) => (
   <Container>
     <Links>
-      <Link>
-        <a href="mailto:jukka.hopea@gmail.com">gmail</a>
-      </Link>
-      <Link>
-        <a href="https://github.com/jukkhop">github</a>
-      </Link>
-      <Link>
-        <a href="https://www.linkedin.com/in/jukka-hopeavuori-65b83b72/">
-          linkedin
-        </a>
-      </Link>
+      {links.map(link => (
+        <Link key={link.to}>
+          <a href={link.to}>{link.text}</a>
+        </Link>
+      ))}
     </Links>
     <Stripes>
       <Stripe width="25%" alpha={0.45} />
@@ -88,7 +83,14 @@ const Footer = () => (
   </Container>
 );
 
-Footer.propTypes = {};
+Footer.propTypes = {
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      to: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 Footer.defaultProps = {};
 
 export default Footer;

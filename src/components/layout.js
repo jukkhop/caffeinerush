@@ -2,10 +2,11 @@ import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+
 import Footer from './footer';
 import Header from './header';
 import { breakpoints } from '../constants/styles';
-import './layout.css';
+import '../css/layout.css';
 
 const BodyStyle = createGlobalStyle`
   body {
@@ -44,6 +45,18 @@ const Layout = ({ children, location, theme }) => (
             title
           }
         }
+        contentfulNavLinks {
+          links {
+            to
+            text
+          }
+        }
+        contentfulFooterLinks {
+          links {
+            to
+            text
+          }
+        }
       }
     `}
     render={data => (
@@ -51,13 +64,14 @@ const Layout = ({ children, location, theme }) => (
         <>
           <BodyStyle />
           <Header
+            navs={data.contentfulNavLinks.links}
             location={location}
-            siteTitle={data.site.siteMetadata.title}
             theme={theme}
+            title={data.site.siteMetadata.title}
           />
           <Main>
             <Children>{children}</Children>
-            <Footer />
+            <Footer links={data.contentfulFooterLinks.links} />
           </Main>
         </>
       </ThemeProvider>
