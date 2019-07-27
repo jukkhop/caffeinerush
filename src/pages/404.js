@@ -7,8 +7,8 @@ import { themes } from '../constants/styles';
 const NotFoundPage = () => (
   <Layout theme={themes.light}>
     <SEO title="404: Not found" />
-    <h2>NOT FOUND</h2>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    <h1>OOPS!</h1>
+    <p>There is nothing here.</p>
   </Layout>
 );
 
