@@ -148,12 +148,7 @@ Header.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
-  navs: PropTypes.arrayOf(
-    PropTypes.shape({
-      to: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  navs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   title: PropTypes.string.isRequired,
   theme: themeProps.isRequired,
 };
