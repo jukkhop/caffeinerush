@@ -1,12 +1,12 @@
-import { string } from 'prop-types';
+import { shape, string } from 'prop-types';
 
-export const themeProps = {
+export const themeShape = shape({
   bg: string.isRequired,
   fg: string.isRequired,
   introFg: string.isRequired,
   headerFg: string.isRequired,
   linkColor: string.isRequired,
-};
+});
 
 export const breakpoints = {
   large: '960px',

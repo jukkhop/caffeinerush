@@ -95,8 +95,14 @@ Post.propTypes = {
     contentfulPost: PropTypes.shape({
       createdAt: PropTypes.string,
       title: PropTypes.string,
-      body: PropTypes.string,
-      image: PropTypes.string,
+      body: PropTypes.shape({
+        childMarkdownRemark: PropTypes.shape({
+          html: PropTypes.string,
+        }),
+      }),
+      image: PropTypes.shape({
+        fluid: PropTypes.shape({}),
+      }),
     }),
     contentfulPostTemplate: PropTypes.shape({
       navBackText: PropTypes.string,

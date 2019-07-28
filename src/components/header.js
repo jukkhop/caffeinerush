@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { breakpoints, themeProps } from '../constants/styles';
+import { breakpoints, themeShape } from '../constants/styles';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -150,7 +150,7 @@ Header.propTypes = {
   }).isRequired,
   navs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   title: PropTypes.string.isRequired,
-  theme: themeProps.isRequired,
+  theme: themeShape.isRequired,
 };
 
 Header.defaultProps = {};
