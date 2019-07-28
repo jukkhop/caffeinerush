@@ -1,15 +1,15 @@
 module.exports = {
   siteMetadata: {
     title: `caffeinerush`,
-    description: `Personal about page and blog`,
-    author: `@jukkhop`,
+    description: `Personal introductory page and blog`,
+    author: `Jukka Hopeavuori <jukka.hopea@gmail.com>`,
   },
   plugins: [
+    `gatsby-plugin-catch-links`,
+    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-offline`,
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-catch-links`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     {
@@ -22,6 +22,12 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
       },
     },
     {
@@ -43,12 +49,6 @@ module.exports = {
       options: {
         spaceId: `hzoq2y05ueq0`,
         accessToken: `ZC-4mxoHhlXJGvElFpA0j_WTh4xF7cRnX16897Ped38`,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography`,
       },
     },
   ],

@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -65,5 +66,17 @@ const IndexPage = ({ data, location }) => (
     </Content>
   </Layout>
 );
+
+IndexPage.propTypes = {
+  data: PropTypes.shape({
+    contentfulIndexPage: PropTypes.shape({
+      author: PropTypes.shape({
+        fluid: PropTypes.shape({}).isRequired,
+      }).isRequired,
+      credits: PropTypes.arrayOf(PropTypes.shape({})),
+    }),
+  }).isRequired,
+  location: PropTypes.shape({}).isRequired,
+};
 
 export default IndexPage;

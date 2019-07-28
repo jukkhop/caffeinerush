@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { breakpoints } from '../constants/styles';
+import { breakpoints, themeProps } from '../constants/styles';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -145,20 +145,19 @@ const Header = ({ location, navs, title, theme }) => (
 );
 
 Header.propTypes = {
-  title: PropTypes.string,
-  location: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
   navs: PropTypes.arrayOf(
     PropTypes.shape({
       to: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
     }),
   ).isRequired,
-
-  theme: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+  theme: themeProps.isRequired,
 };
 
-Header.defaultProps = {
-  siteTitle: ``,
-};
+Header.defaultProps = {};
 
 export default Header;

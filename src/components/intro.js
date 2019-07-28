@@ -1,5 +1,8 @@
+/* eslint-disable react/no-array-index-key */
+
 import { Delay } from 'animate-components';
-import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled, { createGlobalStyle } from 'styled-components';
 
@@ -199,29 +202,26 @@ const Intro = ({ credits }) => {
 
   const timer = useRef(null);
 
-  useEffect(
-    () => {
-      const index = credits.indexOf(credit);
-      const nextIndex = index < credits.length - 1 ? index + 1 : 0;
-      const nextCredit = credits[nextIndex];
-      const incrLoop = index > -1 && nextIndex === 0;
-      const timeout = credit ? fadeOutDelay : 100;
+  useEffect(() => {
+    const index = credits.indexOf(credit);
+    const nextIndex = index < credits.length - 1 ? index + 1 : 0;
+    const nextCredit = credits[nextIndex];
+    const incrLoop = index > -1 && nextIndex === 0;
+    const timeout = credit ? fadeOutDelay : 100;
 
-      const nextState = {
-        credit: nextCredit,
-        loopCount: incrLoop ? loopCount + 1 : loopCount,
-      };
+    const nextState = {
+      credit: nextCredit,
+      loopCount: incrLoop ? loopCount + 1 : loopCount,
+    };
 
-      timer.current = setTimeout(() => {
-        setState(nextState);
-      }, timeout);
+    timer.current = setTimeout(() => {
+      setState(nextState);
+    }, timeout);
 
-      return () => {
-        clearTimeout(timer.current);
-      };
-    },
-    [credits, credit, loopCount],
-  );
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, [credits, credit, loopCount]);
 
   if (!credits || credits.length === 0) {
     return <Container />;
@@ -235,7 +235,7 @@ const Intro = ({ credits }) => {
   const key = `${loopCount}_${credit.key}`;
 
   return (
-    <>
+    <Fragment>
       <Keyframes />
       <Container>
         <TransitionGroup>
@@ -269,8 +269,12 @@ const Intro = ({ credits }) => {
           </CSSTransition>
         </TransitionGroup>
       </Container>
-    </>
+    </Fragment>
   );
+};
+
+Intro.propTypes = {
+  credits: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default Intro;

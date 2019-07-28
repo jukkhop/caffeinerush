@@ -69,7 +69,7 @@ const Footer = ({ links }) => (
   <Container>
     <Links>
       {links.map(link => (
-        <Link key={link.to}>
+        <Link href={link.to}>
           <a href={link.to}>{link.text}</a>
         </Link>
       ))}

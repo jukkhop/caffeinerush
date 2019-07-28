@@ -19,6 +19,7 @@ exports.createPages = async ({ graphql, actions }) => {
     `);
 
     if (errors) {
+      // eslint-disable-next-line no-console
       console.log('Error retrieving contentful data', errors);
     }
 
@@ -35,6 +36,7 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log('Error retrieving contentful data', error);
   }
 };

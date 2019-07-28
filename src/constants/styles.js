@@ -1,3 +1,13 @@
+import { string } from 'prop-types';
+
+export const themeProps = {
+  bg: string.isRequired,
+  fg: string.isRequired,
+  introFg: string.isRequired,
+  headerFg: string.isRequired,
+  linkColor: string.isRequired,
+};
+
 export const breakpoints = {
   large: '960px',
   medium: '576px',

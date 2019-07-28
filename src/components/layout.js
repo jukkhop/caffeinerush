@@ -1,6 +1,6 @@
 import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import Footer from './footer';
@@ -61,7 +61,7 @@ const Layout = ({ children, location, theme }) => (
     `}
     render={data => (
       <ThemeProvider theme={theme}>
-        <>
+        <Fragment>
           <BodyStyle />
           <Header
             navs={data.contentfulNavLinks.links}
@@ -73,7 +73,7 @@ const Layout = ({ children, location, theme }) => (
             <Children>{children}</Children>
             <Footer links={data.contentfulFooterLinks.links} />
           </Main>
-        </>
+        </Fragment>
       </ThemeProvider>
     )}
   />
