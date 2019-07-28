@@ -1,6 +1,7 @@
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -87,6 +88,21 @@ const Post = ({ data, location }) => {
       </Content>
     </Layout>
   );
+};
+
+Post.propTypes = {
+  data: PropTypes.shape({
+    contentfulPost: PropTypes.shape({
+      createdAt: PropTypes.string,
+      title: PropTypes.string,
+      body: PropTypes.string,
+      image: PropTypes.string,
+    }),
+    contentfulPostTemplate: PropTypes.shape({
+      navBackText: PropTypes.string,
+    }),
+  }).isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
 export default Post;

@@ -1,6 +1,7 @@
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -96,6 +97,15 @@ const BlogPage = ({ data, location }) => {
       </Content>
     </Layout>
   );
+};
+
+BlogPage.propTypes = {
+  data: PropTypes.shape({
+    allContentfulPost: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    }),
+  }).isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
 export default BlogPage;

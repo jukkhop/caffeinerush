@@ -2,8 +2,8 @@ import verticalRhythm from 'compass-vertical-rhythm';
 import gray from 'gray-percentage';
 import Typography from 'typography';
 import { MOBILE_MEDIA_QUERY } from 'typography-breakpoint-constants';
-
 import { themes } from '../constants/styles';
+
 const { linkColor } = themes.light;
 
 const theme = {

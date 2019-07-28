@@ -1,4 +1,5 @@
 import { graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -48,10 +49,22 @@ const AboutPage = ({ data, location }) => {
         keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
       />
       <Content>
+        {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{ __html: body.body }} />
       </Content>
     </Layout>
   );
+};
+
+AboutPage.propTypes = {
+  data: PropTypes.shape({
+    contentfulAboutPage: PropTypes.shape({
+      body: PropTypes.shape({
+        body: PropTypes.string.isRequired,
+      }).isRequired,
+    }),
+  }).isRequired,
+  location: PropTypes.shape({}).isRequired,
 };
 
 export default AboutPage;
