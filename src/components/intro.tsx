@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 
 import { Delay } from 'animate-components';
-import PropTypes from 'prop-types';
-import React, { Fragment, useState, useEffect, useRef } from 'react';
+import React, { FunctionComponent, useState, useEffect, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled, { createGlobalStyle } from 'styled-components';
 
 import { breakpoints } from '../constants/styles';
+
 import {
   ModernVisionEOT,
   ModernVisionSVG,
@@ -14,11 +14,38 @@ import {
   ModernVisionWOFF,
 } from '../utils/fonts';
 
+interface Props {
+  credits: Credit[];
+}
+
+interface Credit {
+  bottom: string;
+  key: string;
+  lines: string[];
+  top: string;
+}
+
+interface InitialState {
+  credit?: Credit;
+  loopCount: number;
+}
+
+type EffectCbReturn = () => void;
+
+interface StyledCredit {
+  top: string;
+  bottom: string;
+}
+
+interface StyledWriter {
+  duration: number;
+  length: number;
+}
+
 const typingDuration = 350;
 const fadeOutDelay = 5000;
 
 const Keyframes = createGlobalStyle`
-
   @font-face {
     font-family: 'Modern-Vision';
     src: url(${ModernVisionEOT}?#iefix) format('embedded-opentype'),
@@ -99,7 +126,7 @@ const Keyframes = createGlobalStyle`
 
 const Container = styled.div`
   align-self: flex-start;
-  background-color: ${x => x.theme.bg};
+  background-color: ${(x): string => x.theme.bg};
   display: flex;
   flex-basis: 50%;
   height: 100%;
@@ -129,10 +156,10 @@ const Container = styled.div`
   }
 `;
 
-const Credit = styled.div`
+const Credit = styled.div<StyledCredit>`
   min-height: 94px;
   position: relative;
-  top: ${x => x.top || 'auto'};
+  top: ${(x): string => x.top || 'auto'};
   width: 400px;
 
   @media (max-width: ${breakpoints.large}) {
@@ -166,7 +193,7 @@ const WriterContainer = styled.div`
 
 const Rectangle = styled.div`
   align-self: center;
-  background-color: ${x => x.theme.introFg};
+  background-color: ${(x): string => x.theme.introFg};
   height: 23px;
   width: 21px;
 
@@ -177,10 +204,12 @@ const Rectangle = styled.div`
   }
 `;
 
-const Writer = styled.div`
-  animation: typing ${x => x.duration}ms steps(${x => x.length});
+const Writer = styled.div<StyledWriter>`
+  animation: typing ${(x): number => x.duration}ms
+    steps(${(x): number => x.length});
+
   box-sizing: border-box;
-  color: ${x => x.theme.introFg};
+  color: ${(x): string => x.theme.introFg};
   font-family: Modern-Vision;
   font-size: 2.25rem;
   letter-spacing: 0.75px;
@@ -194,16 +223,16 @@ const Writer = styled.div`
   }
 `;
 
-const Intro = ({ credits }) => {
-  const [{ credit, loopCount }, setState] = useState({
-    credit: null,
+const Intro: FunctionComponent<Props> = ({ credits }): JSX.Element => {
+  const [{ credit, loopCount }, setState] = useState<InitialState>({
+    credit: undefined,
     loopCount: 0,
   });
 
-  const timer = useRef(null);
+  const timer = useRef(0);
 
-  useEffect(() => {
-    const index = credits.indexOf(credit);
+  useEffect((): EffectCbReturn => {
+    const index = credit ? credits.indexOf(credit) : -1;
     const nextIndex = index < credits.length - 1 ? index + 1 : 0;
     const nextCredit = credits[nextIndex];
     const incrLoop = index > -1 && nextIndex === 0;
@@ -214,11 +243,11 @@ const Intro = ({ credits }) => {
       loopCount: incrLoop ? loopCount + 1 : loopCount,
     };
 
-    timer.current = setTimeout(() => {
+    timer.current = window.setTimeout((): void => {
       setState(nextState);
     }, timeout);
 
-    return () => {
+    return (): void => {
       clearTimeout(timer.current);
     };
   }, [credits, credit, loopCount]);
@@ -235,46 +264,44 @@ const Intro = ({ credits }) => {
   const key = `${loopCount}_${credit.key}`;
 
   return (
-    <Fragment>
+    <>
       <Keyframes />
       <Container>
         <TransitionGroup>
           <CSSTransition key={key} timeout={1150} classNames="credit">
             <Delay timeout={1200}>
               <Credit top={top} bottom={bottom}>
-                {lines.map((line, index) => (
-                  <CreditLine key={index}>
-                    <Delay timeout={index * typingDuration + 100}>
-                      <WriterContainer>
-                        <Rectangle
-                          className={
-                            index < lines.length - 1
-                              ? 'rectangle-hide'
-                              : 'rectangle-flicker-out'
-                          }
-                        />
-                        <Writer
-                          className="writer"
-                          duration={typingDuration}
-                          length={line.length}
-                        >
-                          {line}
-                        </Writer>
-                      </WriterContainer>
-                    </Delay>
-                  </CreditLine>
-                ))}
+                {lines.map(
+                  (line, index): JSX.Element => (
+                    <CreditLine key={index}>
+                      <Delay timeout={index * typingDuration + 100}>
+                        <WriterContainer>
+                          <Rectangle
+                            className={
+                              index < lines.length - 1
+                                ? 'rectangle-hide'
+                                : 'rectangle-flicker-out'
+                            }
+                          />
+                          <Writer
+                            className="writer"
+                            duration={typingDuration}
+                            length={line.length}
+                          >
+                            {line}
+                          </Writer>
+                        </WriterContainer>
+                      </Delay>
+                    </CreditLine>
+                  ),
+                )}
               </Credit>
             </Delay>
           </CSSTransition>
         </TransitionGroup>
       </Container>
-    </Fragment>
+    </>
   );
-};
-
-Intro.propTypes = {
-  credits: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default Intro;

@@ -1,7 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable @typescript-eslint/indent  */
+
+import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
+
+interface Data {
+  site: {
+    siteMetadata: {
+      title: string;
+      description: string;
+      author: string;
+    };
+  };
+}
 
 const detailsQuery = graphql`
   query DefaultSEOQuery {
@@ -15,11 +26,29 @@ const detailsQuery = graphql`
   }
 `;
 
-function SEO({ description, lang, meta, keywords, title }) {
+interface Props {
+  description?: string;
+  lang?: string;
+  meta?: {
+    name: string;
+    content: string;
+    property?: undefined;
+  }[];
+  keywords?: string[];
+  title: string;
+}
+
+const SEO: FunctionComponent<Props> = ({
+  description = '',
+  lang = 'en',
+  meta = [],
+  keywords = [],
+  title,
+}): JSX.Element => {
   return (
     <StaticQuery
       query={detailsQuery}
-      render={data => {
+      render={(data: Data): JSX.Element => {
         const metaDescription =
           description || data.site.siteMetadata.description;
         return (
@@ -77,21 +106,6 @@ function SEO({ description, lang, meta, keywords, title }) {
       }}
     />
   );
-}
-
-SEO.defaultProps = {
-  description: ``,
-  keywords: [],
-  lang: `en`,
-  meta: [],
-};
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  keywords: PropTypes.arrayOf(PropTypes.string),
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.shape({})),
-  title: PropTypes.string.isRequired,
 };
 
 export default SEO;

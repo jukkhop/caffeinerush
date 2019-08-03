@@ -1,5 +1,7 @@
-const path = require(`path`);
-const slash = require(`slash`);
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const path = require('path');
+const slash = require('slash');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -23,7 +25,7 @@ exports.createPages = async ({ graphql, actions }) => {
       console.log('Error retrieving contentful data', errors);
     }
 
-    const template = path.resolve('./src/templates/post.js');
+    const template = path.resolve('./src/templates/post.tsx');
 
     data.allContentfulPost.edges.forEach(({ node }) => {
       createPage({

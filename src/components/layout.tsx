@@ -1,17 +1,24 @@
 import { StaticQuery, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import React, { FunctionComponent, ReactNode } from 'react';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import Footer from './footer';
 import Header from './header';
-import { breakpoints } from '../constants/styles';
+import { Themed, ThemeProps, breakpoints } from '../constants/styles';
 import '../css/layout.css';
 
-const BodyStyle = createGlobalStyle`
+interface Props {
+  children: ReactNode;
+  location: {
+    pathname: string;
+  };
+  theme: ThemeProps;
+}
+
+const BodyStyle = createGlobalStyle<Themed>`
   body {
-    background: ${x => x.theme.bg};
-    color: ${x => x.theme.fg};
+    background: ${(x): string => x.theme.bg};
+    color: ${(x): string => x.theme.fg};
     transition: background 500ms;
   }
 `;
@@ -36,7 +43,11 @@ const Children = styled.div`
   }
 `;
 
-const Layout = ({ children, location, theme }) => (
+const Layout: FunctionComponent<Props> = ({
+  children,
+  location,
+  theme,
+}): JSX.Element => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -59,13 +70,13 @@ const Layout = ({ children, location, theme }) => (
         }
       }
     `}
-    render={data => (
+    render={(data): JSX.Element => (
       <ThemeProvider theme={theme}>
-        <Fragment>
+        <>
           <BodyStyle />
           <Header
-            navs={data.contentfulNavLinks.links}
             location={location}
+            navs={data.contentfulNavLinks.links}
             theme={theme}
             title={data.site.siteMetadata.title}
           />
@@ -73,16 +84,10 @@ const Layout = ({ children, location, theme }) => (
             <Children>{children}</Children>
             <Footer links={data.contentfulFooterLinks.links} />
           </Main>
-        </Fragment>
+        </>
       </ThemeProvider>
     )}
   />
 );
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  location: PropTypes.shape({}).isRequired,
-  theme: PropTypes.shape({}).isRequired,
-};
 
 export default Layout;

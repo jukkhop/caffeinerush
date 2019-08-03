@@ -1,7 +1,23 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { breakpoints } from '../constants/styles';
+
+interface LinkProps {
+  href: string;
+  key: string;
+}
+
+interface StripeProps {
+  alpha: number;
+  width: string;
+}
+
+interface Props {
+  links: {
+    text: string;
+    to: string;
+  }[];
+}
 
 const Container = styled.footer`
   margin: 0 auto;
@@ -17,10 +33,10 @@ const Links = styled.div`
   max-width: 450px;
 `;
 
-const Link = styled.div`
+const Link = styled.div<LinkProps>`
   a {
     background-image: none;
-    color: ${x => x.theme.fg};
+    color: ${(x): string => x.theme.fg};
     cursor: pointer;
     font-family: 'Varela Round';
     font-size: 0.527rem;
@@ -35,8 +51,8 @@ const Link = styled.div`
       to top,
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0) 1px,
-      ${x => x.theme.fg} 1px,
-      ${x => x.theme.fg} 2px,
+      ${(x): string => x.theme.fg} 1px,
+      ${(x): string => x.theme.fg} 2px,
       rgba(0, 0, 0, 0) 2px
     );
   }
@@ -47,32 +63,34 @@ const Stripes = styled.div`
   width: 100%;
 `;
 
-const Stripe = styled.div`
+const Stripe = styled.div<StripeProps>`
   background: linear-gradient(
     90deg,
-    ${x => x.theme.bg} 0%,
-    rgba(253, 55, 119, ${x => x.alpha}) 50%,
-    ${x => x.theme.bg} 100%
+    ${(x): string => x.theme.bg} 0%,
+    rgba(253, 55, 119, ${(x): number => x.alpha}) 50%,
+    ${(x): string => x.theme.bg} 100%
   );
 
   height: 3px;
   margin-left: auto;
   margin-right: auto;
-  width: ${x => x.width};
+  width: ${(x): string => x.width};
 
   &:not(:last-of-type) {
     margin-bottom: 0.5rem;
   }
 `;
 
-const Footer = ({ links }) => (
+const Footer: FunctionComponent<Props> = ({ links }): JSX.Element => (
   <Container>
     <Links>
-      {links.map(link => (
-        <Link key={link.to} href={link.to}>
-          <a href={link.to}>{link.text}</a>
-        </Link>
-      ))}
+      {links.map(
+        (link): JSX.Element => (
+          <Link href={link.to} key={link.to}>
+            <a href={link.to}>{link.text}</a>
+          </Link>
+        ),
+      )}
     </Links>
     <Stripes>
       <Stripe width="25%" alpha={0.45} />
@@ -82,15 +100,5 @@ const Footer = ({ links }) => (
     </Stripes>
   </Container>
 );
-
-Footer.propTypes = {
-  links: PropTypes.arrayOf(
-    PropTypes.shape({
-      to: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-};
-Footer.defaultProps = {};
 
 export default Footer;

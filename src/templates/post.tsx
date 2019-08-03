@@ -1,8 +1,7 @@
 import { graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
+import Img, { FluidObject } from 'gatsby-image';
 import moment from 'moment';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 import Layout from '../components/layout';
@@ -66,13 +65,40 @@ const Body = styled.div`
   margin-top: 1.75rem;
 `;
 
-const Post = ({ data, location }) => {
-  const { navBackText } = data.contentfulPostTemplate;
-  const { createdAt, title, body, image } = data.contentfulPost;
+interface Data {
+  contentfulPostTemplate: {
+    navBackText: string;
+  };
+  contentfulPost: {
+    body: {
+      childMarkdownRemark: {
+        html: string;
+      };
+    };
+    createdAt: string;
+    image: {
+      fluid: FluidObject;
+    };
+    title: string;
+  };
+}
 
+interface Props {
+  data: Data;
+  location: {
+    pathname: string;
+  };
+}
+
+const Post: FunctionComponent<Props> = ({ data, location }): JSX.Element => {
+  const { navBackText } = data.contentfulPostTemplate;
+  const { body, createdAt, image, title } = data.contentfulPost;
   return (
     <Layout theme={themes.light} location={location}>
-      <SEO title={title} />
+      <SEO
+        title={title}
+        keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
+      />
       <Link to="/blog">{navBackText}</Link>
       <Content>
         {image && (
@@ -88,27 +114,6 @@ const Post = ({ data, location }) => {
       </Content>
     </Layout>
   );
-};
-
-Post.propTypes = {
-  data: PropTypes.shape({
-    contentfulPost: PropTypes.shape({
-      createdAt: PropTypes.string,
-      title: PropTypes.string,
-      body: PropTypes.shape({
-        childMarkdownRemark: PropTypes.shape({
-          html: PropTypes.string,
-        }),
-      }),
-      image: PropTypes.shape({
-        fluid: PropTypes.shape({}),
-      }),
-    }),
-    contentfulPostTemplate: PropTypes.shape({
-      navBackText: PropTypes.string,
-    }),
-  }).isRequired,
-  location: PropTypes.shape({}).isRequired,
 };
 
 export default Post;

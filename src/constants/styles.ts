@@ -1,12 +1,14 @@
-import { shape, string } from 'prop-types';
+export interface ThemeProps {
+  bg: string;
+  fg: string;
+  introFg: string;
+  headerFg: string;
+  linkColor: string;
+}
 
-export const themeShape = shape({
-  bg: string.isRequired,
-  fg: string.isRequired,
-  introFg: string.isRequired,
-  headerFg: string.isRequired,
-  linkColor: string.isRequired,
-});
+export interface Themed {
+  theme: ThemeProps;
+}
 
 export const breakpoints = {
   large: '960px',
