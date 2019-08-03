@@ -3,6 +3,16 @@ import Img, { FluidObject } from 'gatsby-image';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
+export interface Post {
+  createdAt: string;
+  id: string;
+  image: {
+    fluid: FluidObject;
+  };
+  slug: string;
+  title: string;
+}
+
 const Container = styled.div`
   align-items: center;
   display: flex;
@@ -18,8 +28,8 @@ const Left = styled.div`
 
   img {
     height: 65px;
-    width: auto;
     object-fit: contain !important;
+    width: auto;
   }
 `;
 
@@ -35,16 +45,6 @@ const Title = styled.h3`
 const CreatedAt = styled.div`
   font-size: 0.8175rem;
 `;
-
-export interface Post {
-  createdAt: string;
-  id: string;
-  image: {
-    fluid: FluidObject;
-  };
-  slug: string;
-  title: string;
-}
 
 const PostElement: FunctionComponent<Post> = ({
   createdAt,

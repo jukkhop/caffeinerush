@@ -10,6 +10,11 @@ export interface Themed {
   theme: ThemeProps;
 }
 
+interface Themes {
+  dark: ThemeProps;
+  light: ThemeProps;
+}
+
 export const breakpoints = {
   large: '960px',
   medium: '576px',
@@ -17,7 +22,7 @@ export const breakpoints = {
   mediumHeight: '641px',
 };
 
-export const themes = {
+export const themes: Themes = {
   dark: {
     bg: '#281e3b',
     fg: 'white',

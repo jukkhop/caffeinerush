@@ -3,15 +3,22 @@
 import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
+import { SiteProps } from './layout';
+
+interface Props {
+  description?: string;
+  lang?: string;
+  meta?: {
+    name: string;
+    content: string;
+    property?: undefined;
+  }[];
+  keywords?: string[];
+  title: string;
+}
 
 interface Data {
-  site: {
-    siteMetadata: {
-      title: string;
-      description: string;
-      author: string;
-    };
-  };
+  site: SiteProps;
 }
 
 const detailsQuery = graphql`
@@ -25,18 +32,6 @@ const detailsQuery = graphql`
     }
   }
 `;
-
-interface Props {
-  description?: string;
-  lang?: string;
-  meta?: {
-    name: string;
-    content: string;
-    property?: undefined;
-  }[];
-  keywords?: string[];
-  title: string;
-}
 
 const SEO: FunctionComponent<Props> = ({
   description = '',

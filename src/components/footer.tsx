@@ -1,22 +1,21 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+
+import { LinkProps } from './layout';
 import { breakpoints } from '../constants/styles';
 
-interface LinkProps {
+interface Props {
+  links: LinkProps[];
+}
+
+interface StyledLink {
   href: string;
   key: string;
 }
 
-interface StripeProps {
+interface StyledStripe {
   alpha: number;
   width: string;
-}
-
-interface Props {
-  links: {
-    text: string;
-    to: string;
-  }[];
 }
 
 const Container = styled.footer`
@@ -33,7 +32,7 @@ const Links = styled.div`
   max-width: 450px;
 `;
 
-const Link = styled.div<LinkProps>`
+const Link = styled.div<StyledLink>`
   a {
     background-image: none;
     color: ${(x): string => x.theme.fg};
@@ -63,7 +62,7 @@ const Stripes = styled.div`
   width: 100%;
 `;
 
-const Stripe = styled.div<StripeProps>`
+const Stripe = styled.div<StyledStripe>`
   background: linear-gradient(
     90deg,
     ${(x): string => x.theme.bg} 0%,

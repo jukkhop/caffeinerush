@@ -15,6 +15,32 @@ interface Props {
   theme: ThemeProps;
 }
 
+export interface LinkProps {
+  active: boolean;
+  className: string;
+  fg: string;
+  text: string;
+  to: string;
+}
+
+export interface SiteProps {
+  siteMetadata: {
+    title: string;
+    description: string;
+    author: string;
+  };
+}
+
+interface Data {
+  contentfulNavLinks: {
+    links: LinkProps[];
+  };
+  contentfulFooterLinks: {
+    links: LinkProps[];
+  };
+  site: SiteProps;
+}
+
 const BodyStyle = createGlobalStyle<Themed>`
   body {
     background: ${(x): string => x.theme.bg};
@@ -70,7 +96,7 @@ const Layout: FunctionComponent<Props> = ({
         }
       }
     `}
-    render={(data): JSX.Element => (
+    render={(data: Data): JSX.Element => (
       <ThemeProvider theme={theme}>
         <>
           <BodyStyle />

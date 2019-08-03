@@ -1,30 +1,26 @@
 import { Link } from 'gatsby';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+
+import { LinkProps } from './layout';
 import { ThemeProps, breakpoints } from '../constants/styles';
+
+interface Props {
+  location: {
+    pathname: string;
+  };
+  navs: LinkProps[];
+  title: string;
+  theme: ThemeProps;
+}
 
 interface StyledStripe {
   alpha: number;
   width: string;
 }
 
-interface NavProps {
+interface StyledNav {
   fg: string;
-}
-
-interface Props {
-  location: {
-    pathname: string;
-  };
-  navs: {
-    active: boolean;
-    className: string;
-    fg: string;
-    text: string;
-    to: string;
-  }[];
-  title: string;
-  theme: ThemeProps;
 }
 
 const Container = styled.div`
@@ -95,7 +91,7 @@ const Navs = styled.ul`
   justify-self: flex-end;
 `;
 
-const Nav = styled.li<NavProps>`
+const Nav = styled.li<StyledNav>`
   display: block;
   margin-bottom: 0;
 
