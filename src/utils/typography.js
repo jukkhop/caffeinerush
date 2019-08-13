@@ -18,6 +18,10 @@ const theme = {
       name: 'Lora',
       styles: ['400', '400i', '700'],
     },
+    {
+      name: 'Fira Core',
+      styles: ['400'],
+    },
   ],
   headerFontFamily: ['Varela Round', 'sans-serif'],
   bodyFontFamily: ['Lora', 'serif'],
