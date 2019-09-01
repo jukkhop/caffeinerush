@@ -43,6 +43,10 @@ const Content = styled.div`
   p {
     font-size: 0.948rem;
   }
+
+  li {
+    font-size: 0.948rem;
+  }
 `;
 
 const ImgContainer = styled.div`

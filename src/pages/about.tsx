@@ -45,11 +45,6 @@ const Content = styled.div`
     margin-bottom: 0;
     padding-bottom: 1.25rem;
   }
-
-  li {
-    font-size: 0.948rem;
-    margin-bottom: 0.25rem;
-  }
 `;
 
 const AboutPage: FunctionComponent<Props> = ({
