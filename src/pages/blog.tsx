@@ -42,19 +42,30 @@ export const query = graphql`
   }
 `;
 
-const enhancePosts = (edges: Edge[]): Post[] =>
-  edges.map(
+function enhancePosts(edges: Edge[]): Post[] {
+  return edges.map(
     ({ node }: Edge): Post => ({
       ...node,
       createdAt: moment(node.createdAt).format('MMMM Do, YYYY'),
     }),
   );
+}
+
+function sortPosts(a: Post, b: Post): number {
+  if (a.createdAt > b.createdAt) {
+    return -1;
+  }
+  if (b.createdAt > a.createdAt) {
+    return 1;
+  }
+  return 0;
+}
 
 const BlogPage: FunctionComponent<Props> = ({
   data,
   location,
 }): JSX.Element => {
-  const posts = enhancePosts(data.allContentfulPost.edges);
+  const posts = enhancePosts(data.allContentfulPost.edges).sort(sortPosts);
   return (
     <Layout location={location} theme={themes.light}>
       <SEO

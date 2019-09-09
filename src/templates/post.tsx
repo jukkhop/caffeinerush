@@ -1,12 +1,23 @@
+/* eslint-disable no-restricted-globals */
+
 import { graphql, Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import moment from 'moment';
-import React, { FunctionComponent } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { themes } from '../constants/styles';
+import waitForGlobal from '../utils/wait-for-global';
+
+declare global {
+  interface Window {
+    MathJax: any; // eslint-disable-line
+  }
+}
+
+window.MathJax = window.MathJax || {};
 
 export const query = graphql`
   query($slug: String!) {
@@ -46,6 +57,11 @@ const Content = styled.div`
 
   li {
     font-size: 0.948rem;
+  }
+
+  span.mjx-chtml {
+    display: block;
+    text-align: center;
   }
 `;
 
@@ -94,30 +110,62 @@ interface Props {
   };
 }
 
-const Post: FunctionComponent<Props> = ({ data, location }): JSX.Element => {
-  const { navBackText } = data.contentfulPostTemplate;
-  const { body, createdAt, image, title } = data.contentfulPost;
-  return (
-    <Layout theme={themes.light} location={location}>
-      <SEO
-        title={title}
-        keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
-      />
-      <Link to="/blog">{navBackText}</Link>
-      <Content>
-        {image && (
-          <ImgContainer>
-            <Img alt={title} fluid={image.fluid} />
-          </ImgContainer>
-        )}
-        <h1>{title}</h1>
-        <CreatedAt>{moment(createdAt).format('MMMM Do, YYYY')}</CreatedAt>
-        <Body
-          dangerouslySetInnerHTML={{ __html: body.childMarkdownRemark.html }}
+class Post extends Component<Props, {}> {
+  componentDidMount(): void {
+    waitForGlobal('MathJax').then((): void => {
+      if (top.MathJax && top.MathJax.Hub) {
+        top.MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['[', ']']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+              equationNumbers: { autoNumber: 'AMS' },
+              extensions: ['AMSmath.js', 'AMSsymbols.js'],
+            },
+          },
+        });
+      }
+    });
+    if (top.MathJax && top.MathJax.Hub) {
+      top.MathJax.Hub.Queue(['Typeset', top.MathJax.Hub]);
+    }
+  }
+
+  componentDidUpdate(): void {
+    if (top.MathJax && top.MathJax.Hub) {
+      top.MathJax.Hub.Queue(['Typeset', top.MathJax.Hub]);
+    }
+  }
+
+  render(): JSX.Element {
+    const { data, location } = this.props;
+    const { navBackText } = data.contentfulPostTemplate;
+    const { body, createdAt, image, title } = data.contentfulPost;
+    return (
+      <Layout theme={themes.light} location={location}>
+        <SEO
+          title={title}
+          keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
         />
-      </Content>
-    </Layout>
-  );
-};
+        <Link to="/blog">{navBackText}</Link>
+        <Content>
+          {image && (
+            <ImgContainer>
+              <Img alt={title} fluid={image.fluid} />
+            </ImgContainer>
+          )}
+          <h1>{title}</h1>
+          <CreatedAt>{moment(createdAt).format('MMMM Do, YYYY')}</CreatedAt>
+          <Body
+            dangerouslySetInnerHTML={{ __html: body.childMarkdownRemark.html }}
+          />
+        </Content>
+      </Layout>
+    );
+  }
+}
 
 export default Post;
