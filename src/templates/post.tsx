@@ -17,7 +17,9 @@ declare global {
   }
 }
 
-window.MathJax = window.MathJax || {};
+if (typeof window !== 'undefined') {
+  window.MathJax = window.MathJax || {};
+}
 
 export const query = graphql`
   query($slug: String!) {
