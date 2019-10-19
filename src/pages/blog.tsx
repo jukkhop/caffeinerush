@@ -46,7 +46,7 @@ function enhancePosts(edges: Edge[]): Post[] {
   return edges.map(
     ({ node }: Edge): Post => ({
       ...node,
-      createdAt: moment(node.createdAt).format('MMMM Do, YYYY'),
+      createdAtMoment: moment(node.createdAt),
     }),
   );
 }

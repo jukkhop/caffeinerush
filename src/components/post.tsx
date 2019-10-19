@@ -1,10 +1,12 @@
 import { Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
+import { Moment } from 'moment';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 export interface Post {
   createdAt: string;
+  createdAtMoment: Moment;
   id: string;
   image: {
     fluid: FluidObject;
@@ -47,7 +49,7 @@ const CreatedAt = styled.div`
 `;
 
 const PostElement: FunctionComponent<Post> = ({
-  createdAt,
+  createdAtMoment,
   id,
   image,
   slug,
@@ -61,7 +63,7 @@ const PostElement: FunctionComponent<Post> = ({
       <Title>
         <Link to={`/blog/${slug}`}>{title}</Link>
       </Title>
-      <CreatedAt>{createdAt}</CreatedAt>
+      <CreatedAt>{createdAtMoment.format('MMMM Do, YYYY')}</CreatedAt>
     </Right>
   </Container>
 );
