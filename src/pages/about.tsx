@@ -10,7 +10,9 @@ interface Props {
   data: {
     contentfulAboutPage: {
       body: {
-        body: string;
+        childMarkdownRemark: {
+          html: string;
+        };
       };
     };
   };
@@ -23,7 +25,9 @@ export const query = graphql`
   query {
     contentfulAboutPage {
       body {
-        body
+        childMarkdownRemark {
+          html
+        }
       }
     }
   }
@@ -59,8 +63,10 @@ const AboutPage: FunctionComponent<Props> = ({
       keywords={[`jukka hopeavuori`, `developer`, `helsinki`]}
     />
     <Content>
-      {/* eslint-disable-next-line react/no-danger */}
-      <div dangerouslySetInnerHTML={{ __html: body.body }} />
+      <div
+        /* eslint-disable-next-line react/no-danger */
+        dangerouslySetInnerHTML={{ __html: body.childMarkdownRemark.html }}
+      />
     </Content>
   </Layout>
 );
