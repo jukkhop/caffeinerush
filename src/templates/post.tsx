@@ -9,6 +9,8 @@ import styled from 'styled-components';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { themes } from '../constants/styles';
+
+import mathJaxConfig from '../utils/mathjax-config';
 import waitForGlobal from '../utils/wait-for-global';
 
 declare global {
@@ -116,19 +118,7 @@ class Post extends Component<Props, {}> {
   componentDidMount(): void {
     waitForGlobal('MathJax').then((): void => {
       if (top.MathJax && top.MathJax.Hub) {
-        top.MathJax.Hub.Config({
-          tex2jax: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            displayMath: [['$$', '$$'], ['[', ']']],
-            processEscapes: true,
-            processEnvironments: true,
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            TeX: {
-              equationNumbers: { autoNumber: 'AMS' },
-              extensions: ['AMSmath.js', 'AMSsymbols.js'],
-            },
-          },
-        });
+        top.MathJax.Hub.Config(mathJaxConfig);
       }
     });
     if (top.MathJax && top.MathJax.Hub) {
