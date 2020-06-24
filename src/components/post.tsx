@@ -25,12 +25,11 @@ const Left = styled.div`
   min-width: 15%;
 
   div {
-    height: 65px;
+    max-height: 65px;
   }
 
   img {
-    height: 65px;
-    object-fit: contain !important;
+    max-height: 65px;
     width: auto;
   }
 `;

@@ -52,7 +52,7 @@ const Content = styled.div`
   padding-bottom: 5rem;
 
   p:first-of-type {
-    margin-top: 2.5rem;
+    margin-top: 2.25rem;
   }
 
   p {
@@ -70,14 +70,13 @@ const Content = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  max-width: 600px;
-  max-height: 200px;
+  max-width: 675px;
+  max-height: 275px;
   margin: 2.5rem 0;
 
   div,
   img {
-    max-height: 200px;
-    object-fit: contain !important;
+    max-height: 275px;
   }
 `;
 
