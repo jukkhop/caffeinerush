@@ -27,7 +27,7 @@
     "gatsby-remark-mathjax": "^1.0.0",
     "gatsby-source-contentful": "^2.1.15",
     "gatsby-source-filesystem": "^2.1.6",
-    "gatsby-transformer-remark": "^2.6.9",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^2.2.4",
     "gray-percentage": "^2.0.0",
     "moment": "^2.24.0",
